@@ -1,0 +1,87 @@
+.signup-container {
+  text-align: center;
+}
+
+.signup-content {
+  background: #fff;
+  box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+  border-radius: 2px;
+  width: 500px;
+  display: inline-block;
+  margin-top: 30px;
+  vertical-align: middle;
+  position: relative;
+  padding: 35px;
+}
+
+.social-signup {
+  background: #f55247;
+  color: white;
+  border-radius: 22px;
+  width: 300px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  img {
+    width: 55px;
+  }
+  span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+}
+
+.social-signup:hover span {
+  padding-right: 25px;
+}
+
+.social-signup:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.social-signup:hover {
+  box-shadow: 1px -3px 11px rgba(0, 0, 0, 0.27);
+}
+
+.laravel-auth-btn {
+  color: #ffffff;
+}
+
+.or-separator {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 1em;
+}
+
+.or-text {
+  position: absolute;
+  left: 46%;
+  top: 0;
+  background: #fff;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.qr-code {
+  img {
+    width: 85%;
+  }
+}
