@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import configureStore from "./store/configureStore.prod";
+import configureStore from "./store/configureStore";
 import { onLocalLogin } from "./actions/userAction";
 
 const store = configureStore();

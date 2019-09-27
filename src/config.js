@@ -15,7 +15,7 @@ const dev = {
   auth: {
     AUTH_CLIENT_ID: 3,
     AUTH_CLIENT_SECRET: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
-    REDIRECT_URI: "http://localhost:3000/callback"
+    REDIRECT_URI: "http://localhost:3000/auth-callback.html"
   },
   BASE_URL: "http://127.0.0.1:8000"
 };
@@ -37,7 +37,7 @@ const prod = {
   auth: {
     AUTH_CLIENT_ID: 3,
     AUTH_CLIENT_SECRET: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
-    REDIRECT_URI: "http://localhost:3000/callback"
+    REDIRECT_URI: "http://localhost:3000/auth-callback.html"
   },
   BASE_URL: "http://127.0.0.1:8000"
 };

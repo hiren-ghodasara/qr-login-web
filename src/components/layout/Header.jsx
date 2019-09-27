@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import LoadingBar from 'react-redux-loading-bar'
 import { Layout, Menu, Dropdown, Icon } from "antd";
-import authService from "../../services/authService";
-import { userLogout } from "../../actions/userAction";
 const Header = Layout.Header;
 
 class SiteHeader extends Component {
@@ -32,6 +30,8 @@ class SiteHeader extends Component {
     }
     return (
       <Header className="app-header">
+         {/* <LoadingBar scope="sectionBar" style={{ backgroundColor: 'blue', height: '5px' }} /> */}
+         <LoadingBar />
         <div className="container">
           <div className="app-title">
             <Link to="/">Laravel Auth With QR Code</Link>
@@ -64,7 +64,7 @@ function ProfileDropdownMenu(props) {
 
   return (
     <Dropdown overlay={dropdownMenu} trigger={["click"]} getPopupContainer={() => document.getElementsByClassName("profile-menu")[0]}>
-      <a href="#" className="ant-dropdown-link">
+      <a href="#foo" className="ant-dropdown-link">
         <Icon type="user" className="nav-icon" style={{ marginRight: 0 }} /> <Icon type="down" />
       </a>
     </Dropdown>

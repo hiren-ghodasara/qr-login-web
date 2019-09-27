@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import cuid from "cuid";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
 import queryString from "query-string";
 import config from "./../../config";
-import authService from "../../services/authService";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    console.log("this.props", this.props);
-  }
   onClickLogin() {
     const state = cuid();
     const configAuth = {
