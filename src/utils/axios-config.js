@@ -41,7 +41,11 @@ const onResponseSuccess = response => {
 };
 
 const onResponseError = error => {
-  // console.log("Axios onResponseError", error);
+  console.log("Axios onResponseError", error.response);
+
+  if(!error.response){
+    return Promise.reject(error);
+  }
 
   if (error.response.status !== 401) {
     return Promise.reject(error);

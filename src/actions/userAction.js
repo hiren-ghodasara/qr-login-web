@@ -53,6 +53,7 @@ export function onRefreshToken(refreshToken) {
       data: exchangeOptions
     };
     try {
+      //debugger;
       const res = await axios.request(options);
       saveTokens(res);
       dispatch({ type: types.AUTH_TOKEN_SUCCESS, payload: res });
@@ -74,6 +75,17 @@ export function getUserProfile() {
       return res;
     } catch (error) {
       dispatch(hideLoading());
+      return Promise.reject(error);
+    }
+  };
+}
+
+export function getQrCode() {
+  return async function(dispatch) {
+    try {
+      const res = await axios.get("/api/get-qr-code");
+      return res;
+    } catch (error) {
       return Promise.reject(error);
     }
   };
@@ -111,7 +123,7 @@ export function userLogout() {
 }
 
 // Auth Helper Functions
-function saveTokens(params) {
+export function saveTokens(params) {
   //console.log("saveTokens params", params);
   const { access_token, expires_in, refresh_token } = params;
   const expires_at = new Date();
