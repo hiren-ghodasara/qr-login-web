@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "62580925c8b4382fb0a9ff58c5efc963",
+    "revision": "7b5211cde033853044434c555d287188",
     "url": "/qr-login-web/index.html"
   },
   {
