@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "af514897b4798a0272d169f57d9b8401",
+    "revision": "b6be7f1e0c8ebbca14dffc142187c977",
     "url": "/qr-login-web/index.html"
   },
   {
-    "revision": "18594b5b5d4a61b98487",
+    "revision": "7524eb695d74d180d677",
     "url": "/qr-login-web/static/css/0.aa994fe8.chunk.css"
   },
   {
-    "revision": "0b9759ef801768f6f835",
+    "revision": "4c72db774c47b3840f51",
     "url": "/qr-login-web/static/css/3.e4ab9787.chunk.css"
   },
   {
@@ -16,16 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/qr-login-web/static/css/5.710cf7d9.chunk.css"
   },
   {
-    "revision": "d61814615d91b9652167",
+    "revision": "9988f09dcdb2b2bbaff7",
     "url": "/qr-login-web/static/css/main.107a33f2.chunk.css"
   },
   {
-    "revision": "18594b5b5d4a61b98487",
-    "url": "/qr-login-web/static/js/0.d3fc8137.chunk.js"
+    "revision": "7524eb695d74d180d677",
+    "url": "/qr-login-web/static/js/0.985dbd99.chunk.js"
   },
   {
-    "revision": "0b9759ef801768f6f835",
-    "url": "/qr-login-web/static/js/3.93795d90.chunk.js"
+    "revision": "4c72db774c47b3840f51",
+    "url": "/qr-login-web/static/js/3.5500e2f0.chunk.js"
   },
   {
     "revision": "9f239f3cab96a1325526",
@@ -40,15 +40,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/qr-login-web/static/js/6.85b60603.chunk.js"
   },
   {
-    "revision": "0270875c41f67928ea48",
-    "url": "/qr-login-web/static/js/7.7ab1c503.chunk.js"
+    "revision": "1a9cfba57453818e964c",
+    "url": "/qr-login-web/static/js/7.0358168e.chunk.js"
   },
   {
-    "revision": "d61814615d91b9652167",
-    "url": "/qr-login-web/static/js/main.53f8f09a.chunk.js"
+    "revision": "9988f09dcdb2b2bbaff7",
+    "url": "/qr-login-web/static/js/main.7eac2797.chunk.js"
   },
   {
-    "revision": "8adc31c7cf9be9f20aba",
-    "url": "/qr-login-web/static/js/runtime~main.2b9bccf3.js"
+    "revision": "737bbbe3b188b4e45d22",
+    "url": "/qr-login-web/static/js/runtime~main.48b51dcf.js"
   }
 ]);

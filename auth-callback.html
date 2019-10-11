@@ -159,6 +159,7 @@
       if (stateCookie === state) {
         let exchangeOptions = {};
         let authUrl = "http://127.0.0.1:8000/oauth/token";
+        let reloadUrl="/";
         if (window.location.hostname == `localhost`) {
           exchangeOptions = {
             grant_type: "authorization_code",
@@ -168,6 +169,7 @@
             code: code
           };
           authUrl = "http://127.0.0.1:8000/oauth/token";
+          reloadUrl="/";
         } else {
           exchangeOptions = {
             grant_type: "authorization_code",
@@ -177,6 +179,7 @@
             code: code
           };
           authUrl = "http://qr-login-backend.initcode.in/oauth/token";
+          reloadUrl="/qr-login-web";
         }
         var xhr = new XMLHttpRequest();
         xhr.open("POST", authUrl, true);
@@ -190,7 +193,7 @@
             } else {
               alert("something else other than 200 was returned");
             }
-            window.location.href = "/";
+            window.location.href = reloadUrl;
           }
         };
         xhr.send(JSON.stringify(exchangeOptions));
