@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Auth</title>
     <style>
       html {
         height: 100%;
@@ -125,7 +127,7 @@
   </head>
   <body>
     <div class="splash-screen">
-        <img src="assets/security01-last-frame.svg" />
+      <img src="assets/security01-last-frame.svg" />
       <div id="noTrespassingOuterBarG">
         <div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
           <div class="noTrespassingBarLineG"></div>
@@ -153,15 +155,27 @@
       const stateCookie = localStorage.getItem("state_cuid");
       console.log("state", state);
       console.log("stateCookie", stateCookie);
+      console.log("window.location.origin.", window.location);
       if (stateCookie === state) {
-        const exchangeOptions = {
-          grant_type: "authorization_code",
-          client_id: 3,
-          client_secret: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
-          redirect_uri: "http://localhost:3000/auth-callback.html",
-          code: code
-        };
-        const authUrl = "http://127.0.0.1:8000/oauth/token";
+        if (window.location.hostname == `localhost`) {
+          const exchangeOptions = {
+            grant_type: "authorization_code",
+            client_id: 3,
+            client_secret: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
+            redirect_uri: "http://localhost:3000/auth-callback.html",
+            code: code
+          };
+          const authUrl = "http://127.0.0.1:8000/oauth/token";
+        } else {
+          const exchangeOptions = {
+            grant_type: "authorization_code",
+            client_id: 3,
+            client_secret: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
+            redirect_uri: "https://hiren-ghodasara.github.io/qr-login-web/auth-callback.html",
+            code: code
+          };
+          const authUrl = "http://qr-login-backend.initcode.in/oauth/token";
+        }
         var xhr = new XMLHttpRequest();
         xhr.open("POST", authUrl, true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -174,7 +188,7 @@
             } else {
               alert("something else other than 200 was returned");
             }
-            window.location.href = "/";
+            //window.location.href = "/";
           }
         };
         xhr.send(JSON.stringify(exchangeOptions));
