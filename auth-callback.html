@@ -157,24 +157,26 @@
       console.log("stateCookie", stateCookie);
       console.log("window.location.origin.", window.location);
       if (stateCookie === state) {
+        let exchangeOptions = {};
+        let authUrl = "http://127.0.0.1:8000/oauth/token";
         if (window.location.hostname == `localhost`) {
-          const exchangeOptions = {
+          exchangeOptions = {
             grant_type: "authorization_code",
             client_id: 3,
             client_secret: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
             redirect_uri: "http://localhost:3000/auth-callback.html",
             code: code
           };
-          const authUrl = "http://127.0.0.1:8000/oauth/token";
+          authUrl = "http://127.0.0.1:8000/oauth/token";
         } else {
-          const exchangeOptions = {
+          exchangeOptions = {
             grant_type: "authorization_code",
             client_id: 3,
             client_secret: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
             redirect_uri: "https://hiren-ghodasara.github.io/qr-login-web/auth-callback.html",
             code: code
           };
-          const authUrl = "http://qr-login-backend.initcode.in/oauth/token";
+          authUrl = "http://qr-login-backend.initcode.in/oauth/token";
         }
         var xhr = new XMLHttpRequest();
         xhr.open("POST", authUrl, true);
