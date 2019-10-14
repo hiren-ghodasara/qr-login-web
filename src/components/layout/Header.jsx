@@ -14,7 +14,7 @@ class SiteHeader extends Component {
   handleMenuClick({ key }) {
     if (key === "logout") {
       this.props.onLogoutClick().then(res => {
-        window.location.href = "/";
+        window.location.href = process.env.PUBLIC_URL;
       });
     }
   }

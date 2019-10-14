@@ -74,7 +74,7 @@ class Home extends Component {
           console.log(e.uniqueCode.token.accessToken);
           saveTokens(e.uniqueCode.token);
           setTimeout(() => {
-            window.location.href = "/";
+            window.location.href = process.env.PUBLIC_URL;
           }, 1000);
         });
       })
@@ -112,9 +112,11 @@ class Home extends Component {
                 <br></br>
                 <br></br>
                 <Spin tip="Loading..." spinning={this.state.loading}>
-                  <div className="qr-code">
-                    <img alt="qr-code" src={`data:image/jpeg;base64,${this.state.qrImg}`} />
-                  </div>
+                  {this.state.qrImg && (
+                    <div className="qr-code">
+                      <img alt="qr-code" src={`data:image/jpeg;base64,${this.state.qrImg}`} />
+                    </div>
+                  )}
                 </Spin>
               </div>
             </div>

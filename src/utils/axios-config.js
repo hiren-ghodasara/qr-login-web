@@ -55,7 +55,7 @@ const onResponseError = error => {
   const purl = `${error.config.baseURL}/oauth/token`;
   if (error.config.url === purl || error.response.message === "Account is disabled.") {
     localStorage.clear();
-    window.location.href = "/";
+    window.location.href = process.env.PUBLIC_URL;
     return Promise.reject(error);
   }
 
@@ -109,7 +109,7 @@ const onResponseError = error => {
         });
     } else {
       localStorage.clear();
-      window.location.href = "/";
+      window.location.href = process.env.PUBLIC_URL;
       return Promise.reject(error);
     }
   }

@@ -37,12 +37,12 @@ const prod = {
   auth: {
     AUTH_CLIENT_ID: 3,
     AUTH_CLIENT_SECRET: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
-    REDIRECT_URI: "http://localhost:3000/auth-callback.html"
+    REDIRECT_URI: "https://hiren-ghodasara.github.io/qr-login-web/auth-callback.html"
   },
-  BASE_URL: "http://127.0.0.1:8000"
+  BASE_URL: "http://qr-login-backend.initcode.in"
 };
-
-const config = process.env.REACT_APP_STAGE === "production" ? prod : dev;
+console.log("process.env.REACT_APP_STAGE", process.env);
+const config = process.env.NODE_ENV === "production" ? prod : dev;
 
 export default {
   // Add common config values here
