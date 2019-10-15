@@ -69,8 +69,8 @@ class Home extends Component {
         //   console.log(e);
         // });
         var channel2 = echo.channel(`uniqueCode.${res.channel_id}`);
-        channel2.listen("UniqueCodeDecode", e => {
-          // alert("sa");
+        channel2.listen(".UniqueCodeDecode", e => {
+          //alert("sa");
           console.log(e.uniqueCode.token.accessToken);
           saveTokens(e.uniqueCode.token);
           setTimeout(() => {

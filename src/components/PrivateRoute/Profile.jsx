@@ -24,14 +24,14 @@ class Profile extends Component {
       <div className="user-profile">
         <div className="user-details">
           <div className="user-avatar">
-            {this.props.user.name && (
-              <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.props.user.name) }}>
-                {this.props.user.name[0].toUpperCase()}
+            {this.props.user.full_name && (
+              <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.props.user.full_name) }}>
+                {this.props.user.full_name[0].toUpperCase()}
               </Avatar>
             )}
           </div>
           <div className="user-summary">
-            <div className="full-name">{this.props.user.name}</div>
+            <div className="full-name">{this.props.user.full_name}</div>
             <div className="username">@{this.props.user.email}</div>
             <div className="user-joined">Joined {formatDate(this.props.user.created_at)}</div>
           </div>
