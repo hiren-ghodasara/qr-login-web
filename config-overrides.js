@@ -11,7 +11,9 @@ module.exports = override(
     modifyVars: {
       "@layout-body-background": "#FFFFFF",
       "@layout-header-background": "#FFFFFF",
-      "@layout-footer-background": "#F5F5F5"
+      "@layout-footer-background": "#F5F5F5",
+      'primary-color': '#0069d9',
+      'link-color': '#0069d9',
     }
   })
 );

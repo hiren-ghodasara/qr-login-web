@@ -1,0 +1,126 @@
+// Add additional styles here. For example, overwrite certain styles or add new components.
+// Tip: You can use bootstrap's powerful mixins here!
+
+//.alert-myalert {
+//  @include alert-variant(#60667d, #1d1d1d, #f4fdff);
+//}
+
+//@each $color, $value in $theme-colors {
+//  .alert-#{$color} {
+//    box-shadow: 3px 3px theme-color-level($color, -3);
+//  }
+//}
+
+body {
+  font-family: "Poppins", Helvetica, Arial, sans-serif !important;
+  overflow-x: hidden;
+  color: #343a40;
+}
+
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+  padding: 1.5rem 0.875rem;
+}
+
+.list-group-borderless {
+  .list-group-item {
+    padding: 0.425rem 0;
+    border: none;
+    font-size: 0.875rem;
+  }
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.u-avatar {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+
+.loading {
+  position: absolute;
+  background-color: $primary;
+  height: 3px;
+}
+
+.filter-sort {
+  height: 3rem;
+}
+.contest-photo {
+  border: 1px solid #e7eaf3;
+  width: 250px;
+}
+
+/*------------------------------------
+  Typography Font Size
+------------------------------------*/
+.font-size-1 {
+  font-size: 0.875rem;
+}
+
+.font-size-2 {
+  font-size: 1.5rem;
+}
+
+.font-size-3 {
+  font-size: 2rem;
+}
+
+.font-size-4 {
+  font-size: 2.5rem;
+}
+
+.font-size-5 {
+  font-size: 3rem;
+}
+
+/*------------------------------------
+  Avatar
+------------------------------------*/
+.u-avatar {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+
+.u-xs-avatar {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.u-sm-avatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.u-lg-avatar {
+  width: 5rem;
+  height: 5rem;
+}
+
+.u-xl-avatar {
+  width: 10rem;
+  height: 10rem;
+}
+
+.site-model {
+  .ant-modal-content {
+    background: $light;
+  }
+}
+
+// Login Model
+
+.qr-code {
+  img {
+    width: 18rem;
+  }
+}
+
+@import "./fontawesome/scss/fontawesome.scss";
+@import "./fontawesome/scss/solid.scss";
+@import "./fontawesome/scss/brands.scss";

@@ -154,3 +154,9 @@ export function onLocalLogin() {
     }
   };
 }
+
+export function toggleAuthModel(Flag) {
+  return (dispatch, getState) => {
+    dispatch({ type: types.CHANGE_AUTH_MODEL_VISIBILITY, payload: Flag });
+  };
+}

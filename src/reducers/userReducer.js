@@ -1,7 +1,7 @@
 import initialState from "./initialState";
 import * as types from "../actions/actionTypes";
 
-export default function userReducer(state = initialState.user, action) {
+export const userReducer = (state = initialState.user, action) => {
   switch (action.type) {
     case types.AUTH_TOKEN_SUCCESS:
       return {
@@ -20,14 +20,19 @@ export default function userReducer(state = initialState.user, action) {
     case types.USER_LOOUT_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: false
       };
     case types.USER_LIST_SUCCESS:
       return {
         ...state,
         userList: action.payload
       };
+    case types.CHANGE_AUTH_MODEL_VISIBILITY:
+      return {
+        ...state,
+        authModel: action.payload
+      };
     default:
       return state;
   }
-}
+};

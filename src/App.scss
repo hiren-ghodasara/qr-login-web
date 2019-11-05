@@ -1,37 +1,36 @@
 //@import "~antd/dist/antd.css";
-@import '~bootstrap/scss/bootstrap.scss';
-@import "sass/variables.scss";
-@import "sass/siteHeaders.scss";
-@import "sass/home.scss";
-@import "sass/profile.scss";
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+@import 'sass/custom-variables';
+@import '~bootstrap/scss/bootstrap';
+@import 'sass/custom-styles';
 
-.site-logo {
-  width: 120px;
-  height: 31px;
-  float: left;
-}
+// .site-logo {
+//   width: 120px;
+//   height: 31px;
+//   float: left;
+// }
 
-.userInfo {
-  float: right;
-  width: 120px;
-  height: 40px;
-  line-height: 40px;
-  margin: 10px;
-  color: #fff;
-  font-size: 12px;
-  text-align: right;
-}
+// .userInfo {
+//   float: right;
+//   width: 120px;
+//   height: 40px;
+//   line-height: 40px;
+//   margin: 10px;
+//   color: #fff;
+//   font-size: 12px;
+//   text-align: right;
+// }
 
-.nav-link {
-  display: inline-block;
-  margin-left: 6%;
-}
+// .nav-link {
+//   display: inline-block;
+//   margin-left: 6%;
+// }
 
-.site-footer {
-  text-align: center;
-}
+// .site-footer {
+//   text-align: center;
+// }
 
-.main-content{
-  min-height: calc(100vh - 100px);
-  overflow: auto;
-}
+// .main-content{
+//   min-height: calc(100vh - 100px);
+//   overflow: auto;
+// }
