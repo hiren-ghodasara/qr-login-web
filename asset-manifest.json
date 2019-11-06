@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/qr-login-web/static/css/main.32a6646f.chunk.css",
-    "main.js": "/qr-login-web/static/js/main.d17ee6b9.chunk.js",
-    "main.js.map": "/qr-login-web/static/js/main.d17ee6b9.chunk.js.map",
+    "main.js": "/qr-login-web/static/js/main.2b4d59f2.chunk.js",
+    "main.js.map": "/qr-login-web/static/js/main.2b4d59f2.chunk.js.map",
     "runtime~main.js": "/qr-login-web/static/js/runtime~main.17e2f5fb.js",
     "runtime~main.js.map": "/qr-login-web/static/js/runtime~main.17e2f5fb.js.map",
     "static/css/2.6b2167b0.chunk.css": "/qr-login-web/static/css/2.6b2167b0.chunk.css",
@@ -14,7 +14,7 @@
     "static/js/4.b93871c2.chunk.js": "/qr-login-web/static/js/4.b93871c2.chunk.js",
     "static/js/4.b93871c2.chunk.js.map": "/qr-login-web/static/js/4.b93871c2.chunk.js.map",
     "index.html": "/qr-login-web/index.html",
-    "precache-manifest.a3b4651b7cd5db1191fd89eaa0562c14.js": "/qr-login-web/precache-manifest.a3b4651b7cd5db1191fd89eaa0562c14.js",
+    "precache-manifest.72b6ca846466871a5f30a6e3876c60d5.js": "/qr-login-web/precache-manifest.72b6ca846466871a5f30a6e3876c60d5.js",
     "service-worker.js": "/qr-login-web/service-worker.js",
     "static/css/2.6b2167b0.chunk.css.map": "/qr-login-web/static/css/2.6b2167b0.chunk.css.map",
     "static/css/3.4909d231.chunk.css.map": "/qr-login-web/static/css/3.4909d231.chunk.css.map",
