@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a806ac1fb029b74c58fcc0d8f0f2ff63",
+    "revision": "886406f59e67a4830fe461f6f51da5ea",
     "url": "/qr-login-web/index.html"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/qr-login-web/static/css/5.710cf7d9.chunk.css"
   },
   {
-    "revision": "7c4a3966e8d447320c0f",
+    "revision": "de1919a50dd23c253e48",
     "url": "/qr-login-web/static/css/main.107a33f2.chunk.css"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/qr-login-web/static/js/7.0358168e.chunk.js"
   },
   {
-    "revision": "7c4a3966e8d447320c0f",
-    "url": "/qr-login-web/static/js/main.693f8519.chunk.js"
+    "revision": "de1919a50dd23c253e48",
+    "url": "/qr-login-web/static/js/main.58cc2c99.chunk.js"
   },
   {
     "revision": "b86cb13713e29c2ccc5f",
