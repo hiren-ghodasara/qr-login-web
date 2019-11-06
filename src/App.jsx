@@ -19,27 +19,25 @@ Pusher.logToConsole = process.env.NODE_ENV === "production" ? false : true;
 
 setUpInit();
 //const Home = lazy(() => import("./components/home/Home"));
-const Profile = lazy(() => import("./components/PrivateRoute/Profile"));
+const Account = lazy(() => import("./components/PrivateRoute/Account"));
 
 const App = props => {
   return (
-    <HashRouter basename={`/`}>
+    <HashRouter basename={`${process.env.PUBLIC_URL}`}>
       {/* <Router basename={`${process.env.PUBLIC_URL}`}> */}
       <div className="">
         <AuthProvider {...props}>
           <SiteHeader {...props} />
           <Suspense fallback={<div>Loading fallback...</div>}>
-            {/* <Layout>
-              <Content className="main-content" style={{ marginTop: 64 }}> */}
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <AuthorizedRoute path={"/profile"} component={Profile} />
-              <Route path={"/test-color"} component={TestColor} />
-              {/* <Route path={'/login'} component={Login}/> */}
-              <Route component={PageNotFound} />
-            </Switch>
-            {/* </Content>
-            </Layout> */}
+            <main role="main">
+              <Switch>
+                <Route exact path="/" component={LandingPage} />
+                <AuthorizedRoute path={"/account"} component={Account} />
+                <Route path={"/test-color"} component={TestColor} />
+                {/* <Route path={'/login'} component={Login}/> */}
+                <Route component={PageNotFound} />
+              </Switch>
+            </main>
           </Suspense>
           <SiteFooter />
           {props.user.authModel && <LoginModel />}

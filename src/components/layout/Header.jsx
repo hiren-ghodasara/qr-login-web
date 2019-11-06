@@ -25,8 +25,8 @@ class SiteHeader extends Component {
     console.log(`this.props`, this.props);
     const logginUserMenu = (
       <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="profile">
-          <Link to={`/profile`}>Profile</Link>
+        <Menu.Item key="account">
+          <Link to={`/account`}>My Account</Link>
         </Menu.Item>
         <Menu.Item key="logout">Logout</Menu.Item>
       </Menu>
@@ -43,20 +43,10 @@ class SiteHeader extends Component {
                 <nav className="navbar navbar-expand-md navbar-light bg-white py-0">
                   <div className="container">
                     <Link to="/" className="navbar-brand" >
-                      <img className="align-text-bottom" src={"/assets/images/logo.png"} alt="Last" />
+                      <img className="align-text-bottom" src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} alt="Last" />
                       <span className="text-primary h1 font-weight-bold">Last</span>
                     </Link>
-                    <button
-                      className="navbar-toggler border-0 p-0"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#navbarCollapse"
-                      aria-controls="navbarCollapse"
-                      aria-expanded="false"
-                      aria-label="Toggle navigation"
-                    >
-                      <i className="fas fa-bars font-size-2" />
-                    </button>
+                    
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                       <ul className="navbar-nav ml-auto">
                         {/* <li className="nav-item dropdown">

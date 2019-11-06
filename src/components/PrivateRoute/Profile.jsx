@@ -1,91 +1,69 @@
 import React, { Component } from "react";
-import { Avatar, Tabs, List, Button } from "antd";
-import { connect } from "react-redux";
-import { getAvatarColor, formatDate } from "../../utils/helper";
-import { getUserList } from "../../actions/userAction";
+import { Form, Input, Button } from "antd";
 
-const tabBarStyle = {
-  textAlign: "center"
-};
-const TabPane = Tabs.TabPane;
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires."
-];
-class Profile extends Component {
-  componentDidMount() {
-    this.props.getUserList();
-  }
+class ProfileForm extends Component {
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="user-profile">
-        <div className="user-details">
-          <div className="user-avatar">
-            {this.props.user.full_name && (
-              <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.props.user.full_name) }}>
-                {this.props.user.full_name[0].toUpperCase()}
-              </Avatar>
-            )}
+      <div className="container py-5">
+        <Form onSubmit={this.handleSubmit} className="login-form">
+          <div className="row">
+            <div className="col-sm-6 mb-6">
+              <Form.Item label="First Name">
+                {getFieldDecorator("first_name", {
+                  rules: [{ required: true, message: "Please input your first name!" }]
+                })(<Input size="large" placeholder="First Name" />)}
+              </Form.Item>
+            </div>
+            <div className="col-sm-6 mb-6">
+              <Form.Item label="Last Name">
+                {getFieldDecorator("last_name", {
+                  rules: [{ required: true, message: "Please input your last name!" }]
+                })(<Input size="large" placeholder="Last Name" />)}
+              </Form.Item>
+            </div>
           </div>
-          <div className="user-summary">
-            <div className="full-name">{this.props.user.full_name}</div>
-            <div className="username">@{this.props.user.email}</div>
-            <div className="user-joined">Joined {formatDate(this.props.user.created_at)}</div>
-          </div>
-        </div>
-        <div className="user-poll-details">
-          <Tabs defaultActiveKey="1" animated={false} tabBarStyle={tabBarStyle} size="large" className="profile-tabs">
-            <TabPane tab={`Demo 1`} key="1">
-              <Button type="primary" onClick={() => this.props.getUserList()}>
-                Click me!
-              </Button>
-              <h3 style={{ margin: "16px 0" }}>User List</h3>
-              <List
-                size="small"
-                header={<div>Header</div>}
-                footer={<div>Footer</div>}
-                bordered
-                dataSource={this.props.userList}
-                renderItem={item => (
-                  <List.Item>
-                    {item.name} - {item.email}
-                  </List.Item>
-                )}
-              />
-            </TabPane>
-            <TabPane tab={`Demo 2`} key="2">
-              <h3 style={{ margin: "16px 0" }}>Product List</h3>
-              <List
-                size="small"
-                header={<div>Header</div>}
-                footer={<div>Footer</div>}
-                bordered
-                dataSource={data}
-                renderItem={item => <List.Item>{item}</List.Item>}
-              />
-            </TabPane>
-          </Tabs>
-        </div>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" className="login-form-button">
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.userInfo,
-  userList: state.user.userList || []
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getUserList: event => dispatch(getUserList())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+// const Profile = props => {
+//   return (
+//     <div className="container py-5">
+//       <Form onSubmit={this.handleSubmit} className="login-form">
+//         <Form.Item>
+//           {getFieldDecorator("username", {
+//             rules: [{ required: true, message: "Please input your username!" }]
+//           })(<Input prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />)}
+//         </Form.Item>
+//         <Form.Item>
+//           {getFieldDecorator("password", {
+//             rules: [{ required: true, message: "Please input your Password!" }]
+//           })(<Input prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />} type="password" placeholder="Password" />)}
+//         </Form.Item>
+//         <Form.Item>
+//           <Button type="primary" htmlType="submit" className="login-form-button">
+//             Log in
+//           </Button>
+//         </Form.Item>
+//       </Form>
+//     </div>
+//   );
+// };
+const Profile = Form.create({ name: "profile_edit" })(ProfileForm);
+export default Profile;
