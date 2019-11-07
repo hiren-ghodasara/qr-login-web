@@ -4,10 +4,22 @@ import produce from "immer";
 
 const giftsRecipe = (draft = initialState.contest, action) => {
   switch (action.type) {
+    case types.LOAD_CONTEST_REQUEST:
+      return {
+        ...draft,
+        //data: [],
+        listLoader: true
+      };
     case types.LOAD_CONTEST_SUCCESS:
       return {
         ...draft,
-        ...action.payload
+        ...action.payload,
+        listLoader: false
+      };
+    case types.LOAD_CONTEST_FAILURE:
+      return {
+        ...draft,
+        listLoader: false
       };
     case types.LOAD_CONTEST_FILTER_SUCCESS:
       return {
@@ -18,11 +30,11 @@ const giftsRecipe = (draft = initialState.contest, action) => {
       draft.filterData.organizer.forEach(words => {
         if (!words.user.full_name.toUpperCase().includes(action.payload.toUpperCase())) {
           words.visibility = 0;
-        }else{
+        } else {
           words.visibility = 1;
         }
       });
-      break
+      break;
     default:
       return draft;
   }

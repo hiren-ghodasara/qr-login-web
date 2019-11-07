@@ -9,12 +9,14 @@ export function listAllContest(filter) {
   };
   return async dispatch => {
     dispatch(showLoading());
+    dispatch({ type: types.LOAD_CONTEST_REQUEST});
     try {
       const res = await axios.post("/api/get-all-contest", params);
       dispatch({ type: types.LOAD_CONTEST_SUCCESS, payload: res });
       dispatch(hideLoading());
       return res;
     } catch (error) {
+      dispatch({ type: types.LOAD_CONTEST_FAILURE});
       dispatch(hideLoading());
       return Promise.reject(error);
     }

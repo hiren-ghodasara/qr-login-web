@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Collapse, Slider, Pagination, Progress, Checkbox, Input, Button, Statistic } from "antd";
+import { Collapse, Slider, Pagination, Progress, Checkbox, Input, Button, Statistic, Spin, Result } from "antd";
 import { connect } from "react-redux";
 import debounce from "lodash/debounce";
 import { listAllContest, listAllFilter, searchOrganizer, testCreate } from "../actions/contestActions";
@@ -122,7 +122,7 @@ class LandingPage extends Component {
   };
 
   render() {
-    const { data, total, per_page, current_page, filterData } = this.props.contestList;
+    const { data, total, per_page, current_page, filterData, listLoader } = this.props.contestList;
     return (
       <div className="bg-light section">
         <div className="container-fluid py-3">
@@ -147,7 +147,7 @@ class LandingPage extends Component {
                     </div>
                   </div>
                   <div className="row">
-                    <Collapse bordered={false} expandIconPosition={`right`} className="w-100">
+                    <Collapse bordered={false} defaultActiveKey={["1", "2"]} expandIconPosition={`right`} className="w-100">
                       <Panel header={filterHeader(`Price`)} key="1">
                         <PriceRange
                           filterData={filterData}
@@ -194,88 +194,96 @@ class LandingPage extends Component {
                   </div>
                 </div>
               </div>
-              <div className="mt-2">
-                {data &&
-                  data.map((item, index) => (
-                    <div className="card mt-2" key={index}>
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col-4">
-                            <p className="h3 text-uppercase">{item.name}</p>
-                            <ul className="list-inline font-size-1 text-muted">
-                              <li className="list-inline-item">{item.contests_type.id}</li>
-                              <li className="list-inline-item text-muted">•</li>
-                              <li className="list-inline-item">{item.contests_type.name}</li>
-                            </ul>
-                            <img src={`${config.BASE_URL}/${item.photo}`} className="img-fluid contest-photo img-thumbnail" alt={item.name} />
-                            <div className="media align-items-center mt-auto">
-                              <div className="u-avatar mr-2">
-                                <img
-                                  className="img-fluid rounded-circle"
-                                  src={`${config.BASE_URL}/storage/${item.user.avatar_location}`}
-                                  alt={item.user.avatar_location}
-                                />
+              <Spin spinning={listLoader}>
+                <div className="mt-2 contest-result">
+                  {data &&
+                    data.length > 0 &&
+                    data.map((item, index) => (
+                      <div className="card mt-2" key={index}>
+                        <div className="card-body">
+                          <div className="row">
+                            <div className="col-4">
+                              <p className="h3 text-uppercase">{item.name}</p>
+                              <ul className="list-inline font-size-1 text-muted">
+                                <li className="list-inline-item">{item.contests_type.id}</li>
+                                <li className="list-inline-item text-muted">•</li>
+                                <li className="list-inline-item">{item.contests_type.name}</li>
+                              </ul>
+                              <img src={`${config.BASE_URL}/${item.photo}`} className="img-fluid contest-photo img-thumbnail" alt={item.name} />
+                              <div className="media align-items-center mt-auto">
+                                <div className="u-avatar mr-2">
+                                  <img
+                                    className="img-fluid rounded-circle"
+                                    src={`${config.BASE_URL}/storage/${item.user.avatar_location}`}
+                                    alt={item.user.avatar_location}
+                                  />
+                                </div>
+                                <div className="media-body">
+                                  <small className="d-block text-muted">Listed on {item.created_at} by</small>
+                                  <span className="d-block">{item.user.full_name}</span>
+                                </div>
                               </div>
-                              <div className="media-body">
-                                <small className="d-block text-muted">Listed on {item.created_at} by</small>
-                                <span className="d-block">{item.user.full_name}</span>
+                            </div>
+                            <div className="col">
+                              <div className="h2 font-weight-bold">
+                                <i className="fas fa-rupee-sign"></i>
+                                {item.joining_fee}
                               </div>
+                              <p className="text-justify font-size-1">{item.description}</p>
+                              <Progress
+                                size="small"
+                                format={percent => `${item.joined_user}/${item.max_user}`}
+                                status={getColor(item.max_user, item.joined_user)}
+                                percent={(item.joined_user * 100) / item.max_user}
+                                //status="active"
+                              />
+                              <ContestCountdown execution_date={item.execution_date} />
+                              <button type="button" className="btn btn-outline-primary">
+                                Join
+                              </button>
                             </div>
                           </div>
-                          <div className="col">
-                            <div className="h2 font-weight-bold">
-                              <i className="fas fa-rupee-sign"></i>
-                              {item.joining_fee}
+                        </div>
+                        <div className="card-footer border-top-0 pt-0 px-4 pb-4">
+                          <div className="d-sm-flex align-items-sm-center">
+                            {/* Hourly */}
+                            <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
+                              <h3 className="small text-secondary mb-0">Hourly</h3>
+                              <small className="fas fa-clock text-secondary mr-1" />
+                              <span className="align-middle font-size-1 font-weight-medium">35</span>
                             </div>
-                            <p className="text-justify font-size-1">{item.description}</p>
-                            <Progress
-                              size="small"
-                              format={percent => `${item.joined_user}/${item.max_user}`}
-                              status={getColor(item.max_user, item.joined_user)}
-                              percent={(item.joined_user * 100) / item.max_user}
-                              //status="active"
-                            />
-                            <ContestCountdown execution_date={item.execution_date} />
-                            <button type="button" className="btn btn-outline-primary">
-                              Join
-                            </button>
+                            {/* End Hourly */}
+                            {/* Projects */}
+                            <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
+                              <h4 className="small text-secondary mb-0">Projects</h4>
+                              <small className="fas fa-briefcase text-secondary mr-1" />
+                              <span className="align-middle font-size-1 font-weight-medium">15</span>
+                            </div>
+                            {/* End Projects */}
+                            {/* Review */}
+                            <div className="small">
+                              <div className="text-warning mb-1">
+                                <span className="fas fa-star" />
+                                <span className="fas fa-star" />
+                                <span className="fas fa-star" />
+                                <span className="fas fa-star" />
+                                <span className="fas fa-star" />
+                              </div>
+                              <span className="font-weight-semi-bold">4.91</span>
+                              <span className="text-muted">(12k+ reviews)</span>
+                            </div>
+                            {/* End Review */}
                           </div>
                         </div>
                       </div>
-                      <div className="card-footer border-top-0 pt-0 px-4 pb-4">
-                        <div className="d-sm-flex align-items-sm-center">
-                          {/* Hourly */}
-                          <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
-                            <h3 className="small text-secondary mb-0">Hourly</h3>
-                            <small className="fas fa-clock text-secondary mr-1" />
-                            <span className="align-middle font-size-1 font-weight-medium">35</span>
-                          </div>
-                          {/* End Hourly */}
-                          {/* Projects */}
-                          <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
-                            <h4 className="small text-secondary mb-0">Projects</h4>
-                            <small className="fas fa-briefcase text-secondary mr-1" />
-                            <span className="align-middle font-size-1 font-weight-medium">15</span>
-                          </div>
-                          {/* End Projects */}
-                          {/* Review */}
-                          <div className="small">
-                            <div className="text-warning mb-1">
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                            </div>
-                            <span className="font-weight-semi-bold">4.91</span>
-                            <span className="text-muted">(12k+ reviews)</span>
-                          </div>
-                          {/* End Review */}
-                        </div>
-                      </div>
+                    ))}
+                  {data && data.length === 0 && (
+                    <div className="card">
+                      <Result title="No search results found" subTitle="Try other keyword to search!" />
                     </div>
-                  ))}
-              </div>
+                  )}
+                </div>
+              </Spin>
               <div className="mt-2">
                 <Pagination
                   showSizeChanger
