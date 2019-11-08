@@ -1,39 +1,39 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2d970a86e65887adb37c81708b76a597",
+    "revision": "0b4fe591470d29995e68dc331d705586",
     "url": "/qr-login-web/index.html"
   },
   {
-    "revision": "67ce5d0192748e94e216",
+    "revision": "03e68062697a7b7fa163",
     "url": "/qr-login-web/static/css/2.51319a1b.chunk.css"
   },
   {
-    "revision": "e29ca0449663ac7c69e3",
+    "revision": "503888c0a24f6fa98de4",
     "url": "/qr-login-web/static/css/3.c37af20b.chunk.css"
   },
   {
-    "revision": "4417e94eead709e90fe9",
+    "revision": "b0a571ba86e2d47d2630",
     "url": "/qr-login-web/static/css/main.1ae2338f.chunk.css"
   },
   {
-    "revision": "67ce5d0192748e94e216",
-    "url": "/qr-login-web/static/js/2.64843940.chunk.js"
+    "revision": "03e68062697a7b7fa163",
+    "url": "/qr-login-web/static/js/2.255b4382.chunk.js"
   },
   {
-    "revision": "e29ca0449663ac7c69e3",
-    "url": "/qr-login-web/static/js/3.75935600.chunk.js"
+    "revision": "503888c0a24f6fa98de4",
+    "url": "/qr-login-web/static/js/3.908f6b92.chunk.js"
   },
   {
-    "revision": "654c60535ab476b83dfb",
-    "url": "/qr-login-web/static/js/4.b81f0a12.chunk.js"
+    "revision": "4223b9ae8e11b0f7ec7d",
+    "url": "/qr-login-web/static/js/4.40f7f5d3.chunk.js"
   },
   {
-    "revision": "4417e94eead709e90fe9",
-    "url": "/qr-login-web/static/js/main.48386cf4.chunk.js"
+    "revision": "b0a571ba86e2d47d2630",
+    "url": "/qr-login-web/static/js/main.83ab133d.chunk.js"
   },
   {
-    "revision": "d93ae20422df55e7f03c",
-    "url": "/qr-login-web/static/js/runtime~main.db432a6f.js"
+    "revision": "610316b75350a7de0175",
+    "url": "/qr-login-web/static/js/runtime~main.6af66b02.js"
   },
   {
     "revision": "06147b6cd88c7346cecd1edd060cd5de",
