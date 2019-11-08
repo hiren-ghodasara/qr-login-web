@@ -24,7 +24,18 @@ const giftsRecipe = (draft = initialState.contest, action) => {
     case types.LOAD_CONTEST_FILTER_SUCCESS:
       return {
         ...draft,
-        filterData: action.payload
+        filterData: {
+          ...draft.filterData,
+          ...action.payload
+        }
+      };
+    case types.SORT_CONTEST_SUCCESS:
+      return {
+        ...draft,
+        filterData: {
+          ...draft.filterData,
+          sortArr: action.payload
+        }
       };
     case types.ORGANIZER_SEARCH_SUCCESS:
       draft.filterData.organizer.forEach(words => {

@@ -14,7 +14,7 @@ const PageNotFound = props => {
     <div style={{ textAlign: "center" }}>
       <h1>{message}</h1>
       <div style={style404}>404</div>
-      <img src={"/assets/Black_Hole_Orange.png"} alt="Black_Hole_Orange"/>
+      <img src={`${process.env.PUBLIC_URL}/assets/Black_Hole_Orange.png`} alt="Black_Hole_Orange"/>
     </div>
   );
 };

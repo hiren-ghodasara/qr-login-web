@@ -9,35 +9,6 @@ import { getQrCode, saveTokens, toggleAuthModel, getUserProfile } from "../../ac
 import Echo from "laravel-echo";
 import { setUpInit } from "../../utils/axios-config";
 
-// const LoginModel = () => {
-//   const authModel = useSelector(state => state.user.authModel);
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(getQrCode());
-//   }, [authModel]);
-//   const handleCancel = e => {
-//     console.log(e);
-//     dispatch(toggleAuthModel(false));
-//   };
-//   const handleOk = e => {
-//     console.log(e);
-//     dispatch(toggleAuthModel(false));
-//   };
-//   console.log("authModel", authModel);
-//   return authModel ? (
-//     <Modal footer={false} visible={authModel} onOk={handleOk} onCancel={handleCancel}>
-//       <div className="container">
-//         <div className="row">
-//           <div className="col-sm">One of three columns</div>
-//           <div className="col-sm">One of three columns</div>
-//         </div>
-//       </div>
-//     </Modal>
-//   ) : null;
-// };
-
-// export default LoginModel;
-
 const options = {
   broadcaster: "pusher",
   key: "ef9bcd4ecd1038dd7de2",
@@ -114,35 +85,30 @@ class LoginModel extends Component {
 
   render() {
     return (
-      <Modal width={800} footer={false} visible={true} onOk={this.handleOk} onCancel={this.handleCancel} className="site-model">
+      <Modal width={600} footer={false} visible={true} onOk={this.handleOk} onCancel={this.handleCancel} className="site-model">
         <div className="container">
           <div className="row">
-            <div className="col-sm">
-              <ul className="list-group list-group-flush ">
-                <li className="list-group-item bg-transparent">Cras justo odio</li>
-                <li className="list-group-item bg-transparent">Dapibus ac facilisis in</li>
-                <li className="list-group-item bg-transparent">Morbi leo risus</li>
-                <li className="list-group-item bg-transparent">Porta ac consectetur ac</li>
-                <li className="list-group-item bg-transparent">Vestibulum at eros</li>
-              </ul>
-            </div>
-            <div className="col-sm text-center ">
+            {/* <div className="col-sm text-center">
+              <img className="align-text-bottom" src={`${process.env.PUBLIC_URL}/assets/security01-last-frame.svg`} alt="security01" />
+            </div> */}
+            <div className="col-sm text-center">
               <h6 className="signup-title">Login Option</h6>
               <button onClick={this.onClickLogin} type="button" className="btn btn-outline-primary">
-                Login With Laravel Passport{" "}
+                Login With Laravel Passport
               </button>
               <div className="dropdown-divider"></div>
+              <div className="qr-code-area d-flex justify-content-center align-items-center">
+                <Spin tip="Loading..." spinning={this.state.loading}>
+                  {this.state.qrImg && (
+                    <div className="qr-code">
+                      <img alt="qr-code" src={`data:image/jpeg;base64,${this.state.qrImg}`} />
+                    </div>
+                  )}
+                </Spin>
+              </div>
               <button type="button" className="btn btn-primary" onClick={this.loadQrCode}>
-                Get Code
+                Generate New
               </button>
-              <div className="dropdown-divider"></div>
-              <Spin tip="Loading..." spinning={this.state.loading}>
-                {this.state.qrImg && (
-                  <div className="qr-code">
-                    <img alt="qr-code" src={`data:image/jpeg;base64,${this.state.qrImg}`} />
-                  </div>
-                )}
-              </Spin>
             </div>
           </div>
         </div>

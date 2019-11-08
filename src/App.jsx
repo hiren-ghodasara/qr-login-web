@@ -9,8 +9,6 @@ import SiteFooter from "./components/layout/Footer";
 import PageNotFound from "./components/PageNotFound";
 import { setUpInit } from "./utils/axios-config";
 import { userLogout, toggleAuthModel } from "./actions/userAction";
-import TestColor from "./components/Test";
-import LandingPage from "./components/LandingPage";
 import LoginModel from "./components/auth/LoginModel";
 import AuthorizedRoute from "./components/AuthorizedRoute";
 import { AuthProvider } from "./AuthContext/AuthProvider";
@@ -19,7 +17,10 @@ Pusher.logToConsole = process.env.NODE_ENV === "production" ? false : true;
 
 setUpInit();
 //const Home = lazy(() => import("./components/home/Home"));
+const LandingPage = lazy(() => import("./components/LandingPage"));
 const Account = lazy(() => import("./components/PrivateRoute/Account"));
+const ContestInformationPage = lazy(() => import("./components/ContestInformationPage"));
+const TestColor = lazy(() => import("./components/Test"));
 
 const App = props => {
   return (
@@ -34,6 +35,7 @@ const App = props => {
                 <Route exact path="/" component={LandingPage} />
                 <AuthorizedRoute path={"/account"} component={Account} />
                 <Route path={"/test-color"} component={TestColor} />
+                <Route path={"/contest-information/:id"} component={ContestInformationPage} />
                 {/* <Route path={'/login'} component={Login}/> */}
                 <Route component={PageNotFound} />
               </Switch>

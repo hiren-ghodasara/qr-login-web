@@ -1,0 +1,82 @@
+body {
+  font-family: "Poppins", Helvetica, Arial, sans-serif !important;
+  overflow-x: hidden;
+  color: #343a40;
+  font-size: 1rem !important;
+}
+
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+
+/*------------------------------------
+    Typography Font Size
+  ------------------------------------*/
+.font-size-1 {
+  font-size: 0.875rem;
+}
+
+.font-size-2 {
+  font-size: 1.5rem;
+}
+
+.font-size-3 {
+  font-size: 2rem;
+}
+
+.font-size-4 {
+  font-size: 2.5rem;
+}
+
+.font-size-5 {
+  font-size: 3rem;
+}
+
+/*------------------------------------
+    Avatar
+  ------------------------------------*/
+.u-avatar {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+
+.u-xs-avatar {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.u-sm-avatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.u-lg-avatar {
+  width: 5rem;
+  height: 5rem;
+}
+
+.u-xl-avatar {
+  width: 10rem;
+  height: 10rem;
+}
+
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a,
+.h1 > a,
+.h2 > a,
+.h3 > a,
+.h4 > a,
+.h5 > a,
+.h6 > a {
+  color: #1e2022;
+}
+
+.site-model {
+  .ant-modal-content {
+    background: $light;
+  }
+}

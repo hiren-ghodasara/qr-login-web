@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Collapse, Slider, Pagination, Progress, Checkbox, Input, Button, Statistic, Spin, Result } from "antd";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import debounce from "lodash/debounce";
-import { listAllContest, listAllFilter, searchOrganizer, testCreate } from "../actions/contestActions";
+import { listAllContest, listAllFilter, searchOrganizer, chnageSorting, testCreate } from "../actions/contestActions";
 import config from "../config";
 import moment from "moment";
 const { Panel } = Collapse;
@@ -40,6 +41,23 @@ const PriceRange = props => {
   );
 };
 
+const ContestSort = props => {
+  const { sortArr, onChangeSort } = props;
+  return (
+    <div className="row m-0 sort-area">
+      {sortArr.map((item, index) => (
+        <div
+          onClick={() => onChangeSort(sortArr, item)}
+          key={index}
+          className={`col-sm ${item.isActive ? "active text-white" : ""} filter-sort border d-flex align-items-center justify-content-center`}
+        >
+          {item.text} {item.isActive && (item.sortBy === "asc" ? <i className="ml-2 fas fa-sort-up"></i> : <i className="ml-2 fas fa-sort-down"></i>)}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 // eslint-disable-next-line
 const DemoCountdown = value => {
   const test = moment(value.props.value).format("D [days,] HH [hours,] mm [minutes and] ss [seconds]");
@@ -63,12 +81,15 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
     const { per_page, current_page, filterData } = this.props.contestList;
+    console.log("filterData.sortArr.filter(r => !r.isActive)", filterData.sortArr.find(r => r.isActive));
+    const SortVal = filterData.sortArr.find(r => r.isActive);
     this.appliedfilter = {
       page: current_page,
       per_page: per_page,
       price: [filterData.price.min, filterData.price.max],
       contests_type: [],
-      organizer: []
+      organizer: [],
+      sort: { key: SortVal.key, by: SortVal.sortBy }
     };
     this.searchOrganizer = debounce(this.props.searchOrganizer, 300);
   }
@@ -103,6 +124,28 @@ class LandingPage extends Component {
 
   onChangeOrganizer = checkedValues => {
     this.appliedfilter = { ...this.appliedfilter, organizer: checkedValues };
+    this.props.listAllContest(this.appliedfilter);
+  };
+
+  onChangeSort = (Arr, checkedValues) => {
+    const newList = Arr.map(item => {
+      if (item.key === checkedValues.key) {
+        if (checkedValues.isActive) {
+          if (checkedValues.sortBy === "asc") {
+            return { ...item, isActive: true, sortBy: "desc" };
+          } else {
+            return { ...item, isActive: true, sortBy: "asc" };
+          }
+        } else {
+          return { ...item, isActive: true, sortBy: "asc" };
+        }
+      } else {
+        return { ...item, isActive: false };
+      }
+    });
+    this.props.chnageSorting(newList);
+    const currentSort = newList.find(x => x.key === checkedValues.key);
+    this.appliedfilter = { ...this.appliedfilter, sort: { key: currentSort.key, by: currentSort.sortBy } };
     this.props.listAllContest(this.appliedfilter);
   };
 
@@ -187,11 +230,7 @@ class LandingPage extends Component {
             <div className="col-lg-9">
               <div className="card">
                 <div className="card-body p-0">
-                  <div className="row m-0">
-                    <div className="col-sm filter-sort border d-flex align-items-center justify-content-center">Cheapest</div>
-                    <div className="col-sm filter-sort border d-flex align-items-center justify-content-center">Execution Date</div>
-                    <div className="col-sm filter-sort border d-flex align-items-center justify-content-center">Availability</div>
-                  </div>
+                  <ContestSort {...filterData} onChangeSort={this.onChangeSort} />
                 </div>
               </div>
               <Spin spinning={listLoader}>
@@ -203,14 +242,12 @@ class LandingPage extends Component {
                         <div className="card-body">
                           <div className="row">
                             <div className="col-4">
-                              <p className="h3 text-uppercase">{item.name}</p>
-                              <ul className="list-inline font-size-1 text-muted">
-                                <li className="list-inline-item">{item.contests_type.id}</li>
-                                <li className="list-inline-item text-muted">•</li>
-                                <li className="list-inline-item">{item.contests_type.name}</li>
-                              </ul>
+                              <div className="h4 mb-1">
+                                <Link className="text-capitalize" to={`/contest-information/${item.id}`}>{item.name}</Link>
+                              </div>
+                              {/* <p className="h5 text-capitalize">{item.name}</p> */}
                               <img src={`${config.BASE_URL}/${item.photo}`} className="img-fluid contest-photo img-thumbnail" alt={item.name} />
-                              <div className="media align-items-center mt-auto">
+                              <div className="media align-items-center mt-3">
                                 <div className="u-avatar mr-2">
                                   <img
                                     className="img-fluid rounded-circle"
@@ -225,7 +262,7 @@ class LandingPage extends Component {
                               </div>
                             </div>
                             <div className="col">
-                              <div className="h2 font-weight-bold">
+                              <div className="h5 font-weight-bold">
                                 <i className="fas fa-rupee-sign"></i>
                                 {item.joining_fee}
                               </div>
@@ -238,46 +275,17 @@ class LandingPage extends Component {
                                 //status="active"
                               />
                               <ContestCountdown execution_date={item.execution_date} />
-                              <button type="button" className="btn btn-outline-primary">
-                                Join
-                              </button>
                             </div>
                           </div>
                         </div>
-                        <div className="card-footer border-top-0 pt-0 px-4 pb-4">
-                          <div className="d-sm-flex align-items-sm-center">
-                            {/* Hourly */}
-                            <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
-                              <h3 className="small text-secondary mb-0">Hourly</h3>
-                              <small className="fas fa-clock text-secondary mr-1" />
-                              <span className="align-middle font-size-1 font-weight-medium">35</span>
-                            </div>
-                            {/* End Hourly */}
-                            {/* Projects */}
-                            <div className="u-ver-divider u-ver-divider--none-sm pr-4 mr-4 mb-3 mb-sm-0">
-                              <h4 className="small text-secondary mb-0">Projects</h4>
-                              <small className="fas fa-briefcase text-secondary mr-1" />
-                              <span className="align-middle font-size-1 font-weight-medium">15</span>
-                            </div>
-                            {/* End Projects */}
-                            {/* Review */}
-                            <div className="small">
-                              <div className="text-warning mb-1">
-                                <span className="fas fa-star" />
-                                <span className="fas fa-star" />
-                                <span className="fas fa-star" />
-                                <span className="fas fa-star" />
-                                <span className="fas fa-star" />
-                              </div>
-                              <span className="font-weight-semi-bold">4.91</span>
-                              <span className="text-muted">(12k+ reviews)</span>
-                            </div>
-                            {/* End Review */}
-                          </div>
+                        <div className="card-footer border-top-0 d-flex justify-content-end">
+                          <button type="button" className="btn btn-outline-primary">
+                            Join
+                          </button>
                         </div>
                       </div>
                     ))}
-                  {data && data.length === 0 && (
+                  {!listLoader && data && data.length === 0 && (
                     <div className="card">
                       <Result title="No search results found" subTitle="Try other keyword to search!" />
                     </div>
@@ -310,6 +318,7 @@ const mapDispatchToProps = {
   listAllContest,
   listAllFilter,
   searchOrganizer,
+  chnageSorting,
   testCreate
 };
 

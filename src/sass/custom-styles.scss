@@ -1,25 +1,16 @@
-// Add additional styles here. For example, overwrite certain styles or add new components.
-// Tip: You can use bootstrap's powerful mixins here!
-
-//.alert-myalert {
-//  @include alert-variant(#60667d, #1d1d1d, #f4fdff);
-//}
-
-//@each $color, $value in $theme-colors {
-//  .alert-#{$color} {
-//    box-shadow: 3px 3px theme-color-level($color, -3);
-//  }
-//}
-
-body {
-  font-family: "Poppins", Helvetica, Arial, sans-serif !important;
-  overflow-x: hidden;
-  color: #343a40;
-  font-size: 1rem !important;
+// Login Model
+.qr-code-area {
+  min-height: 10rem;
+  .qr-code {
+    img {
+      width: 18rem;
+    }
+  }
 }
 
-.font-weight-semi-bold {
-  font-weight: 600;
+//Landing Page
+.contest-result {
+  min-height: 20rem;
 }
 
 .navbar-nav .nav-link {
@@ -48,85 +39,21 @@ body {
   background-color: $primary;
   height: 3px;
 }
-
+.sort-area {
+  .active {
+    background: #002e6e;
+  }
+}
 .filter-sort {
-  height: 3rem;
+  height: 2.5rem;
+  cursor: pointer;
 }
 .contest-photo {
   border: 1px solid #e7eaf3;
   width: 250px;
 }
 
-/*------------------------------------
-  Typography Font Size
-------------------------------------*/
-.font-size-1 {
-  font-size: 0.875rem;
-}
-
-.font-size-2 {
-  font-size: 1.5rem;
-}
-
-.font-size-3 {
-  font-size: 2rem;
-}
-
-.font-size-4 {
-  font-size: 2.5rem;
-}
-
-.font-size-5 {
-  font-size: 3rem;
-}
-
-/*------------------------------------
-  Avatar
-------------------------------------*/
-.u-avatar {
-  width: 3.125rem;
-  height: 3.125rem;
-}
-
-.u-xs-avatar {
-  width: 1.375rem;
-  height: 1.375rem;
-}
-
-.u-sm-avatar {
-  width: 2rem;
-  height: 2rem;
-}
-
-.u-lg-avatar {
-  width: 5rem;
-  height: 5rem;
-}
-
-.u-xl-avatar {
-  width: 10rem;
-  height: 10rem;
-}
-
-.site-model {
-  .ant-modal-content {
-    background: $light;
-  }
-}
-
-// Login Model
-
-.qr-code {
-  img {
-    width: 18rem;
-  }
-}
-
-//Landing Page
-.contest-result {
-  min-height: 20rem;
-}
-
+@import "./site.scss";
 @import "./fontawesome/scss/fontawesome.scss";
 @import "./fontawesome/scss/solid.scss";
 @import "./fontawesome/scss/brands.scss";

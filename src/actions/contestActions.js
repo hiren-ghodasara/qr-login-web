@@ -66,3 +66,15 @@ export function searchOrganizer(val) {
     }
   };
 }
+
+export function chnageSorting(val) {
+  console.log("chnageSorting-----", val);
+  return async dispatch => {
+    try {
+      dispatch({ type: types.SORT_CONTEST_SUCCESS, payload: val });
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+}
+

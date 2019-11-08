@@ -8,7 +8,16 @@ export default {
     total: 0,
     per_page: 10,
     current_page: 1,
-    filterData: { price: { min: 0, max: 100 }, contests_type: [], organizer: [] },
+    filterData: {
+      price: { min: 0, max: 100 },
+      contests_type: [],
+      organizer: [],
+      sortArr: [
+        { key: "execution_date", text: "Execution Date", isActive: true, sortBy: "asc" },
+        { key: "joining_fee", text: "Cheapest", isActive: false, sortBy: "asc" },
+        { key: "joined_user", text: "Availability", isActive: false, sortBy: "asc" }
+      ]
+    },
     listLoader: false
   }
 };
