@@ -1,37 +1,18 @@
 import React, { Component } from "react";
-import {
-  Collapse,
-  Slider,
-  Pagination,
-  Progress,
-  Checkbox,
-  Input,
-  Button,
-  Statistic,
-  Spin,
-  Result
-} from "antd";
+import { Collapse, Slider, Pagination, Progress, Checkbox, Input, Button, Statistic, Spin, Result } from "antd";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import debounce from "lodash/debounce";
-import {
-  listAllContest,
-  listAllFilter,
-  searchOrganizer,
-  chnageSorting,
-  testCreate
-} from "../actions/contestActions";
+import { listAllContest, listAllFilter, searchOrganizer, chnageSorting, testCreate } from "../actions/contestActions";
 import config from "../config";
 import moment from "moment";
 const { Panel } = Collapse;
 const CheckboxGroup = Checkbox.Group;
 const { Countdown } = Statistic;
-const formatter = value => {
+const formatter = (value) => {
   return `${value}%`;
 };
-const filterHeader = value => (
-  <div className="text-secondary mb-0 font-weight-bold">{value}</div>
-);
+const filterHeader = (value) => <div className="text-secondary mb-0 font-weight-bold">{value}</div>;
 
 const getColor = (T, J) => {
   const percent = Number.parseFloat(((J * 100) / T).toFixed(2));
@@ -44,7 +25,7 @@ const getColor = (T, J) => {
   }
 };
 
-const PriceRange = props => {
+const PriceRange = (props) => {
   const { filterData, onAfterChangePrice, onChangePrice, value } = props;
   return (
     <Slider
@@ -60,7 +41,7 @@ const PriceRange = props => {
   );
 };
 
-const ContestSort = props => {
+const ContestSort = (props) => {
   const { sortArr, onChangeSort } = props;
   return (
     <div className="row m-0 sort-area">
@@ -68,17 +49,9 @@ const ContestSort = props => {
         <div
           onClick={() => onChangeSort(sortArr, item)}
           key={index}
-          className={`col-sm ${
-            item.isActive ? "active text-white" : ""
-          } filter-sort border d-flex align-items-center justify-content-center`}
+          className={`col-sm ${item.isActive ? "active text-white" : ""} filter-sort border d-flex align-items-center justify-content-center`}
         >
-          {item.text}{" "}
-          {item.isActive &&
-            (item.sortBy === "asc" ? (
-              <i className="ml-2 fas fa-sort-up"></i>
-            ) : (
-              <i className="ml-2 fas fa-sort-down"></i>
-            ))}
+          {item.text} {item.isActive && (item.sortBy === "asc" ? <i className="ml-2 fas fa-sort-up"></i> : <i className="ml-2 fas fa-sort-down"></i>)}
         </div>
       ))}
     </div>
@@ -86,14 +59,12 @@ const ContestSort = props => {
 };
 
 // eslint-disable-next-line
-const DemoCountdown = value => {
-  const test = moment(value.props.value).format(
-    "D [days,] HH [hours,] mm [minutes and] ss [seconds]"
-  );
+const DemoCountdown = (value) => {
+  const test = moment(value.props.value).format("D [days,] HH [hours,] mm [minutes and] ss [seconds]");
   return <h1>{test}</h1>;
 };
 
-const ContestCountdown = props => {
+const ContestCountdown = (props) => {
   //let date = moment(props.execution_date);
   const date = moment.utc(props.execution_date).local();
   const duration = moment.duration(date.diff(moment(new Date())));
@@ -103,13 +74,7 @@ const ContestCountdown = props => {
     styleClass = "red";
   }
   // const deadline = Date.now() + duration; //9 days, 23 hours, 59 minutes and 29 seconds
-  return (
-    <Countdown
-      className={styleClass}
-      value={deadline}
-      format={`H[h]:mm[m]:ss[s]`}
-    />
-  );
+  return <Countdown className={styleClass} value={deadline} format={`H[h]:mm[m]:ss[s]`} />;
 };
 
 class LandingPage extends Component {
@@ -118,16 +83,16 @@ class LandingPage extends Component {
     const { per_page, current_page, filterData } = this.props.contestList;
     console.log(
       "filterData.sortArr.filter(r => !r.isActive)",
-      filterData.sortArr.find(r => r.isActive)
+      filterData.sortArr.find((r) => r.isActive),
     );
-    const SortVal = filterData.sortArr.find(r => r.isActive);
+    const SortVal = filterData.sortArr.find((r) => r.isActive);
     this.appliedfilter = {
       page: current_page,
       per_page: per_page,
       price: [filterData.price.min, filterData.price.max],
       contests_type: [],
       organizer: [],
-      sort: { key: SortVal.key, by: SortVal.sortBy }
+      sort: { key: SortVal.key, by: SortVal.sortBy },
     };
     this.searchOrganizer = debounce(this.props.searchOrganizer, 300);
   }
@@ -147,38 +112,38 @@ class LandingPage extends Component {
     this.props.listAllContest(this.appliedfilter);
   };
 
-  onChangePrice = checkedValues => {
+  onChangePrice = (checkedValues) => {
     this.appliedfilter = {
       ...this.appliedfilter,
       price: checkedValues,
-      page: 1
+      page: 1,
     };
   };
 
-  onAfterChangePrice = checkedValues => {
+  onAfterChangePrice = (checkedValues) => {
     this.props.listAllContest(this.appliedfilter);
   };
 
-  onChangeContestType = checkedValues => {
+  onChangeContestType = (checkedValues) => {
     this.appliedfilter = {
       ...this.appliedfilter,
       contests_type: checkedValues,
-      page: 1
+      page: 1,
     };
     this.props.listAllContest(this.appliedfilter);
   };
 
-  onChangeOrganizer = checkedValues => {
+  onChangeOrganizer = (checkedValues) => {
     this.appliedfilter = {
       ...this.appliedfilter,
       organizer: checkedValues,
-      page: 1
+      page: 1,
     };
     this.props.listAllContest(this.appliedfilter);
   };
 
   onChangeSort = (Arr, checkedValues) => {
-    const newList = Arr.map(item => {
+    const newList = Arr.map((item) => {
       if (item.key === checkedValues.key) {
         if (checkedValues.isActive) {
           if (checkedValues.sortBy === "asc") {
@@ -194,11 +159,11 @@ class LandingPage extends Component {
       }
     });
     this.props.chnageSorting(newList);
-    const currentSort = newList.find(x => x.key === checkedValues.key);
+    const currentSort = newList.find((x) => x.key === checkedValues.key);
     this.appliedfilter = {
       ...this.appliedfilter,
       sort: { key: currentSort.key, by: currentSort.sortBy },
-      page: 1
+      page: 1,
     };
     this.props.listAllContest(this.appliedfilter);
   };
@@ -210,12 +175,12 @@ class LandingPage extends Component {
       price: [filterData.price.min, filterData.price.max],
       contests_type: [],
       organizer: [],
-      page: 1
+      page: 1,
     };
     this.props.listAllContest(this.appliedfilter);
   };
 
-  onSearchOrganizer = e => {
+  onSearchOrganizer = (e) => {
     const { value } = e.target;
     this.searchOrganizer(value);
   };
@@ -225,14 +190,7 @@ class LandingPage extends Component {
   };
 
   render() {
-    const {
-      data,
-      total,
-      per_page,
-      current_page,
-      filterData,
-      listLoader
-    } = this.props.contestList;
+    const { data, total, per_page, current_page, filterData, listLoader } = this.props.contestList;
     return (
       <div className="bg-light section">
         <div className="container-fluid py-3">
@@ -246,11 +204,7 @@ class LandingPage extends Component {
                       <p>
                         Showing {per_page} Of {total} Buses
                       </p>
-                      <Button
-                        type="primary"
-                        size="small"
-                        onClick={this.demoCreated}
-                      >
+                      <Button type="primary" size="small" onClick={this.demoCreated}>
                         Demo Contest
                       </Button>
                     </div>
@@ -261,12 +215,7 @@ class LandingPage extends Component {
                     </div>
                   </div>
                   <div className="row">
-                    <Collapse
-                      bordered={false}
-                      defaultActiveKey={["1", "2"]}
-                      expandIconPosition={`right`}
-                      className="w-100"
-                    >
+                    <Collapse bordered={false} defaultActiveKey={["1", "2"]} expandIconPosition={`right`} className="w-100">
                       <Panel header={filterHeader(`Price`)} key="1">
                         <PriceRange
                           filterData={filterData}
@@ -276,10 +225,7 @@ class LandingPage extends Component {
                         />
                       </Panel>
                       <Panel header={filterHeader(`Contest Type`)} key="2">
-                        <CheckboxGroup
-                          onChange={this.onChangeContestType}
-                          value={this.appliedfilter.contests_type}
-                        >
+                        <CheckboxGroup onChange={this.onChangeContestType} value={this.appliedfilter.contests_type}>
                           {filterData.contests_type.map((item, index) => (
                             <div key={index}>
                               <Checkbox value={item.id}>{item.name}</Checkbox>
@@ -288,23 +234,14 @@ class LandingPage extends Component {
                         </CheckboxGroup>
                       </Panel>
                       <Panel header={filterHeader(`Organizer`)} key="3">
-                        <Input
-                          onChange={this.onSearchOrganizer}
-                          size="small"
-                          placeholder="Search Organizer"
-                          className="mb-2 border"
-                        />
-                        <CheckboxGroup
-                          onChange={this.onChangeOrganizer}
-                          value={this.appliedfilter.organizer}
-                        >
+                        <Input onChange={this.onSearchOrganizer} size="small" placeholder="Search Organizer" className="mb-2 border" />
+                        <CheckboxGroup onChange={this.onChangeOrganizer} value={this.appliedfilter.organizer}>
                           {filterData.organizer
-                            .filter(d => d.visibility)
+                            .filter((d) => d.visibility)
                             .map((item, index) => (
                               <div key={index}>
                                 <Checkbox value={item.user.id}>
-                                  {item.user.full_name}{" "}
-                                  <span>{item.total}</span>
+                                  {item.user.full_name} <span>{item.total}</span>
                                 </Checkbox>
                               </div>
                             ))}
@@ -318,10 +255,7 @@ class LandingPage extends Component {
             <div className="col-lg-9">
               <div className="card">
                 <div className="card-body p-0">
-                  <ContestSort
-                    {...filterData}
-                    onChangeSort={this.onChangeSort}
-                  />
+                  <ContestSort {...filterData} onChangeSort={this.onChangeSort} />
                 </div>
               </div>
               <Spin spinning={listLoader}>
@@ -334,19 +268,12 @@ class LandingPage extends Component {
                           <div className="row">
                             <div className="col-md-auto">
                               <div className="h4 mb-1">
-                                <Link
-                                  className="text-capitalize"
-                                  to={`/contest-information/${item.id}`}
-                                >
+                                <Link className="text-capitalize" to={`/contest-information/${item.id}`}>
                                   {item.name}
                                 </Link>
                               </div>
                               {/* <p className="h5 text-capitalize">{item.name}</p> */}
-                              <img
-                                src={`${config.BASE_URL}/${item.photo}`}
-                                className="img-fluid contest-photo img-thumbnail"
-                                alt={item.name}
-                              />
+                              <img src={`${config.BASE_URL}/${item.photo}`} className="img-fluid contest-photo img-thumbnail" alt={item.name} />
                               <div className="media align-items-center mt-3">
                                 <div className="u-avatar mr-2">
                                   <img
@@ -356,12 +283,8 @@ class LandingPage extends Component {
                                   />
                                 </div>
                                 <div className="media-body">
-                                  <small className="d-block text-muted">
-                                    Listed on {item.created_at} by
-                                  </small>
-                                  <span className="d-block">
-                                    {item.user.full_name}
-                                  </span>
+                                  <small className="d-block text-muted">Listed on {item.created_at} by</small>
+                                  <span className="d-block">{item.user.full_name}</span>
                                 </div>
                               </div>
                             </div>
@@ -370,30 +293,16 @@ class LandingPage extends Component {
                                 <i className="fas fa-rupee-sign"></i>
                                 {item.joining_fee}
                               </div>
-                              <p className="text-justify font-size-1">
-                                {item.description}
-                              </p>
+                              <p className="text-justify font-size-1">{item.description}</p>
                               <Progress
                                 size="small"
-                                format={percent =>
-                                  `${item.joined_user}/${item.max_user}`
-                                }
-                                status={getColor(
-                                  item.max_user,
-                                  item.joined_user
-                                )}
-                                percent={
-                                  (item.joined_user * 100) / item.max_user
-                                }
+                                format={(percent) => `${item.joined_user}/${item.max_user}`}
+                                status={getColor(item.max_user, item.joined_user)}
+                                percent={(item.joined_user * 100) / item.max_user}
                                 //status="active"
                               />
-                              <ContestCountdown
-                                execution_date={item.execution_date}
-                              />
-                              <button
-                                type="button"
-                                className="btn btn-outline-primary"
-                              >
+                              <ContestCountdown execution_date={item.execution_date} />
+                              <button type="button" className="btn btn-outline-primary">
                                 Join
                               </button>
                             </div>
@@ -411,10 +320,7 @@ class LandingPage extends Component {
                     ))}
                   {!listLoader && data && data.length === 0 && (
                     <div className="card">
-                      <Result
-                        title="No search results found"
-                        subTitle="Try other keyword to search!"
-                      />
+                      <Result title="No search results found" subTitle="Try other keyword to search!" />
                     </div>
                   )}
                 </div>
@@ -437,8 +343,8 @@ class LandingPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  contestList: state.contest
+const mapStateToProps = (state) => ({
+  contestList: state.contest,
 });
 
 const mapDispatchToProps = {
@@ -446,7 +352,7 @@ const mapDispatchToProps = {
   listAllFilter,
   searchOrganizer,
   chnageSorting,
-  testCreate
+  testCreate,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
