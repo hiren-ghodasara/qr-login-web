@@ -107,16 +107,45 @@ export function getUserList() {
   };
 }
 
+export function userLogin(params) {
+  return async dispatch => {
+    dispatch(showLoading());
+    try {
+      const res = await axios.post("/api/login", params);
+      dispatch(hideLoading());
+      return res;
+    } catch (error) {
+      dispatch(hideLoading());
+      return Promise.reject(error);
+    }
+  };
+}
+
+export function userSignup(params) {
+  return async dispatch => {
+    dispatch(showLoading());
+    try {
+      const res = await axios.post("/api/register", params);
+      dispatch(hideLoading());
+      return res;
+    } catch (error) {
+      dispatch(hideLoading());
+      return Promise.reject(error);
+    }
+  };
+}
+
 export function userLogout() {
   return async dispatch => {
-    dispatch(beginAjaxCall());
+    dispatch(showLoading());
     try {
       const res = await axios.get("/api/logout");
+      dispatch(hideLoading());
       dispatch({ type: types.USER_LOOUT_SUCCESS, payload: res });
       localStorage.clear();
       return res;
     } catch (error) {
-      dispatch(ajaxCallError());
+      dispatch(hideLoading());
       return Promise.reject(error);
     }
   };

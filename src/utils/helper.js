@@ -1,3 +1,5 @@
+import React from "react";
+
 const colors = [
   "#F44336",
   "#e91e63",
@@ -21,7 +23,7 @@ const colors = [
   "#39bbb0",
   "#4CAF50",
   "#ffeb3b",
-  "#ffc107"
+  "#ffc107",
 ];
 
 export function getAvatarColor(name) {
@@ -42,3 +44,38 @@ export function formatDate(dateString) {
   const year = date.getFullYear();
   return monthNames[monthIndex] + " " + year;
 }
+
+const errorItemsNode = (data) => {
+  if (data.errors) {
+    const errorItems = Object.keys(data.errors).map((key, item) => {
+      if (data.errors[key] && data.errors[key].length > 0) {
+        return data.errors[key].map((k, i) => {
+          return (
+            <li className="font-size-1" key={`${key}-${k}`}>
+              {k}
+            </li>
+          );
+        });
+      } else {
+        return (
+          <li className="font-size-1" key={`${key}`}>
+            {key} errors
+          </li>
+        );
+      }
+    });
+    return errorItems;
+  } else {
+    return <li className="font-size-1">Something</li>;
+  }
+};
+
+export const errorFormater = (data, duration) => {
+  const returnData = {
+    message: data.message ? data.message : "Api Error",
+    description: errorItemsNode(data),
+    duration: duration,
+  };
+  console.log("returnData", returnData);
+  return returnData;
+};

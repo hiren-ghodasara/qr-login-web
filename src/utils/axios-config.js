@@ -11,7 +11,7 @@ let isRefreshing = false;
 let failedQueue = [];
 
 const processQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
+  failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
     } else {
@@ -32,7 +32,7 @@ export function setUpInit() {
   axios.interceptors.response.use(onResponseSuccess, onResponseError);
 }
 
-const onResponseSuccess = response => {
+const onResponseSuccess = (response) => {
   // console.log("Axios onResponseSuccess", response.data);
   if (response && response.data) {
     return response.data;
@@ -40,11 +40,15 @@ const onResponseSuccess = response => {
   return response;
 };
 
-const onResponseError = error => {
+const onResponseError = (error) => {
   console.log("Axios onResponseError", error.response);
 
-  if(!error.response){
+  if (!error.response) {
     return Promise.reject(error);
+  } else {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
   }
 
   if (error.response.status !== 401) {
@@ -67,11 +71,11 @@ const onResponseError = error => {
         return new Promise(function(resolve, reject) {
           failedQueue.push({ resolve, reject });
         })
-          .then(token => {
+          .then((token) => {
             originalRequest.headers["Authorization"] = "Bearer " + token;
             return axios(originalRequest);
           })
-          .catch(err => {
+          .catch((err) => {
             return Promise.reject(err);
           });
       }
@@ -82,7 +86,7 @@ const onResponseError = error => {
       const refresh_token = getLocalState("refresh_token");
       return store
         .dispatch(onRefreshToken(refresh_token))
-        .then(response => {
+        .then((response) => {
           const headerAuth = `Bearer ${response.access_token}`;
           originalRequest.headers["Authorization"] = headerAuth;
           processQueue(null, response.access_token);
@@ -96,14 +100,14 @@ const onResponseError = error => {
           //     return Promise.reject(error);
           //   });
         })
-        .catch(error => {
+        .catch((error) => {
           //debugger;
           localStorage.clear();
           window.location.href = "/";
           processQueue(error, null);
           return Promise.reject(error);
         })
-        .finally(ans => {
+        .finally((ans) => {
           isRefreshing = false;
           setUpInit();
         });

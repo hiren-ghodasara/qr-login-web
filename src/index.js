@@ -12,9 +12,11 @@ store.dispatch(onLocalLogin());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {/* <StrictMode> */}
+      <App />
+    {/* </StrictMode> */}
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 
 // If you want your app to work offline and load faster, you can change
