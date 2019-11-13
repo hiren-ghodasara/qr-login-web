@@ -1,0 +1,2 @@
+(window["webpackJsonpqr-auth-web"]=window["webpackJsonpqr-auth-web"]||[]).push([[5],{1492:function(e,t,a){"use strict";a.r(t);a(1447);var r=a(1451),n=(a(63),a(17)),c=a(0),i=a.n(c);t.default=function(e){return i.a.createElement("div",{className:"container"},i.a.createElement(r.a,{status:"500",title:"500",subTitle:"Sorry, the server is wrong.",extra:i.a.createElement(n.a,{type:"primary",onClick:function(){return e.history.goBack()}},"Back Home")}))}}}]);
+//# sourceMappingURL=5.f28b1fb9.chunk.js.map
