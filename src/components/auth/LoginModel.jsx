@@ -27,7 +27,7 @@ class LoginModel extends Component {
     this.state = {
       qrImg: "",
       loading: false,
-      viewScreen: 2,
+      viewScreen: 1,
       loginLoading: false,
       fields: {
         username: {
@@ -126,8 +126,8 @@ class LoginModel extends Component {
       })
       .catch((error) => {
         this.setState({ loginLoading: false });
-        if (error.response && error.response.status === 422) {
-          notification.error(errorFormater(error.response.data, 100));
+        if (error.response) {
+          notification.error(errorFormater(error.response.data, 10));
         } else if (error.request) {
           console.log(error.request);
         } else {
@@ -154,10 +154,7 @@ class LoginModel extends Component {
       .catch((error) => {
         this.setState({ loginLoading: false });
         if (error.response) {
-          notification.error({
-            message: "Api Error",
-            description: error.response.data.message,
-          });
+          notification.error(errorFormater(error.response.data, 10));
         } else if (error.request) {
           console.log(error.request);
         } else {
@@ -177,7 +174,7 @@ class LoginModel extends Component {
                 <button onClick={this.onClickLogin} type="button" className="btn btn-outline-primary">
                   Login With Laravel Passport
                 </button>
-                <div className="dropdown-divider"></div>
+                <div className="my-2 dropdown-divider"></div>
                 <div className="qr-code-area d-flex justify-content-center align-items-center">
                   <Spin tip="Loading..." spinning={this.state.loading}>
                     {this.state.qrImg && (
@@ -187,7 +184,7 @@ class LoginModel extends Component {
                     )}
                   </Spin>
                 </div>
-                <button type="button" className="btn btn-primary" onClick={this.loadQrCode}>
+                <button type="button" className="btn btn-primary mt-2" onClick={this.loadQrCode}>
                   Generate New
                 </button>
                 <div className="mt-3">
@@ -201,7 +198,7 @@ class LoginModel extends Component {
           {this.state.viewScreen === 2 && (
             <div className="row">
               <div className="col-sm text-center">
-                <Spin spinning={false}>
+                <Spin spinning={this.state.loginLoading}>
                   <Tabs defaultActiveKey="1">
                     <TabPane tab="Sign In" key="1" className="d-flex justify-content-center">
                       <div className="col-9 text-left">

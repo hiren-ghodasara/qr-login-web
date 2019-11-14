@@ -22,7 +22,7 @@ const Account = lazy(() => import("./components/PrivateRoute/Account"));
 const ContestInformationPage = lazy(() => import("./components/ContestInformationPage"));
 const TestColor = lazy(() => import("./components/Test"));
 
-const App = props => {
+const App = (props) => {
   return (
     <HashRouter basename={`${process.env.PUBLIC_URL}`}>
       {/* <Router basename={`${process.env.PUBLIC_URL}`}> */}
@@ -51,21 +51,18 @@ const App = props => {
 };
 
 App.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
 };
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
 const mapDispatchToProps = {
   userLogout,
-  toggleAuthModel
+  toggleAuthModel,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 // export default App;

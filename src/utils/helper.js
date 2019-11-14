@@ -66,7 +66,7 @@ const errorItemsNode = (data) => {
     });
     return errorItems;
   } else {
-    return <li className="font-size-1">Something</li>;
+  return <li className="font-size-1">{data.message}</li>;
   }
 };
 
@@ -75,6 +75,10 @@ export const errorFormater = (data, duration) => {
     message: data.message ? data.message : "Api Error",
     description: errorItemsNode(data),
     duration: duration,
+    style: {
+      width: "28rem",
+      marginLeft: "-4rem",
+    },
   };
   console.log("returnData", returnData);
   return returnData;
