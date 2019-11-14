@@ -6,6 +6,7 @@ import { getUserList } from "../../actions/userAction";
 import config from "../../config";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
+import ApiToken from "./ApiToken";
 
 const generalMenu = (
   <Menu>
@@ -56,6 +57,22 @@ const billingMenu = (
     </Menu.Item>
   </Menu>
 );
+
+const accessibilityMenu = (
+  <Menu>
+    <Menu.Item>
+      <Link className="dropdown-item" to={`/account/dashboard`}>
+        Invite friends
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link className="dropdown-item" to={`/account/api-token`}>
+        API Token
+      </Link>
+    </Menu.Item>
+  </Menu>
+);
+
 class Account extends Component {
   componentDidMount() {
     this.props.getUserList();
@@ -101,9 +118,11 @@ class Account extends Component {
                         </Dropdown>
                       </li>
                       <li className="nav-item px-1">
-                        <Link className="nav-link text-white" to={`#`}>
-                          Pricing
-                        </Link>
+                        <Dropdown overlay={accessibilityMenu}>
+                          <Link className="nav-link text-white" to={`#`}>
+                            Accessibility <Icon type="down" />
+                          </Link>
+                        </Dropdown>
                       </li>
                     </ul>
                   </div>
@@ -116,6 +135,7 @@ class Account extends Component {
           <Switch>
             <Route path={`${match.path}/dashboard`} component={Dashboard} />
             <Route path={`${match.path}/profile`} component={Profile} />
+            <Route path={`${match.path}/api-token`} component={ApiToken} />
             <Redirect to={`${match.path}/dashboard`} />
           </Switch>
         </div>
@@ -124,18 +144,15 @@ class Account extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user.userInfo,
-  userList: state.user.userList || []
+  userList: state.user.userList || [],
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getUserList: event => dispatch(getUserList())
+    getUserList: (event) => dispatch(getUserList()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Account);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

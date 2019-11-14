@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   return (
     <div className="container py-5">
       {/* Stats */}
@@ -51,10 +51,9 @@ const Dashboard = props => {
         </div>
         {/* End Card */}
       </div>
-      {/* End Stats */}      
+      {/* End Stats */}
     </div>
   );
 };
-
 
 export default Dashboard;

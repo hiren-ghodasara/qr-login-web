@@ -6,22 +6,22 @@ import { getLocalState, setLocalState } from "../localStorage";
 import config from "../config";
 
 export function getAccessToken(code) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(beginAjaxCall());
     const exchangeOptions = {
       grant_type: "authorization_code",
       client_id: config.auth.AUTH_CLIENT_ID,
       client_secret: config.auth.AUTH_CLIENT_SECRET,
       redirect_uri: config.auth.REDIRECT_URI,
-      code: code
+      code: code,
     };
     const options = {
       method: "POST",
       url: `oauth/token`,
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-      data: exchangeOptions
+      data: exchangeOptions,
     };
     try {
       const res = await axios.request(options);
@@ -35,22 +35,22 @@ export function getAccessToken(code) {
 }
 
 export function onRefreshToken(refreshToken) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(beginAjaxCall());
     const exchangeOptions = {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
       client_id: config.auth.AUTH_CLIENT_ID,
       client_secret: config.auth.AUTH_CLIENT_SECRET,
-      scope: ""
+      scope: "",
     };
     const options = {
       method: "POST",
       url: `oauth/token`,
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-      data: exchangeOptions
+      data: exchangeOptions,
     };
     try {
       //debugger;
@@ -66,11 +66,44 @@ export function onRefreshToken(refreshToken) {
 }
 
 export function getUserProfile() {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(showLoading());
     try {
       const res = await axios.get("/api/user");
       dispatch({ type: types.USER_LOGIN_SUCCESS, payload: res });
+      dispatch(hideLoading());
+      return res;
+    } catch (error) {
+      dispatch(hideLoading());
+      return Promise.reject(error);
+    }
+  };
+}
+
+export function getAllApiTokens() {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      const res = await axios.get("/api/user-tokens");
+      dispatch({ type: types.USER_API_TOKENS_SUCCESS, payload: res });
+      dispatch(hideLoading());
+      return res;
+    } catch (error) {
+      dispatch(hideLoading());
+      return Promise.reject(error);
+    }
+  };
+}
+
+export function revokeToken(id) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      const res = await axios.get("/api/revoke-tokens", {
+        params: {
+          id: id,
+        },
+      });
       dispatch(hideLoading());
       return res;
     } catch (error) {
@@ -108,7 +141,7 @@ export function getUserList() {
 }
 
 export function userLogin(params) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(showLoading());
     try {
       const res = await axios.post("/api/login", params);
@@ -122,7 +155,7 @@ export function userLogin(params) {
 }
 
 export function userSignup(params) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(showLoading());
     try {
       const res = await axios.post("/api/register", params);
@@ -136,7 +169,7 @@ export function userSignup(params) {
 }
 
 export function userLogout() {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(showLoading());
     try {
       const res = await axios.get("/api/logout");

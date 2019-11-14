@@ -1,6 +1,6 @@
 import React from "react";
 import { Result, Button } from "antd";
-const ContestInformationPage = props => {
+const ContestInformationPage = (props) => {
   return (
     <div className="container">
       <Result
