@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Popconfirm, Button, message } from "antd";
-import { getAllApiTokens, revokeToken } from "../../actions/apiTokenAction";
+import { getAllApiTokens, revokeToken } from "../../../actions/apiTokenAction";
 
 const ApiToken = (props) => {
   const tokens = useSelector((state) => state.apiTokenReducer.tokens);

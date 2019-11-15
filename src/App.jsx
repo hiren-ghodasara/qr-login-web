@@ -17,7 +17,7 @@ setUpInit();
 
 const LandingPage = lazy(() => import("./components/LandingPage"));
 const PageNotFound = lazy(() => import("./components/PageNotFound"));
-const Account = lazy(() => import("./components/PrivateRoute/Account"));
+const Account = lazy(() => import("./components/PrivateRoute/Account/Account"));
 const ContestInformationPage = lazy(() => import("./components/ContestInformationPage"));
 const TestColor = lazy(() => import("./components/Test"));
 

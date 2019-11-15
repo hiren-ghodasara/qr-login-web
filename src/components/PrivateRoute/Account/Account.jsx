@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Menu, Dropdown, Icon } from "antd";
 import { connect } from "react-redux";
 import { Link, Route, Switch, Redirect } from "react-router-dom";
-import { getUserProfile } from "../../actions/userAction";
-import config from "../../config";
+import { getUserProfile } from "../../../actions/userAction";
+import config from "../../../config";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import ApiToken from "./ApiToken";
+import Transaction from "./Transaction";
 
 const generalMenu = (
   <Menu>
@@ -36,8 +37,8 @@ const generalMenu = (
 const billingMenu = (
   <Menu>
     <Menu.Item>
-      <Link className="dropdown-item" to={`/account/dashboard`}>
-        Activity
+      <Link className="dropdown-item" to={`/account/transactions`}>
+        Transactions
       </Link>
     </Menu.Item>
     <Menu.Item>
@@ -77,11 +78,15 @@ class Account extends Component {
               <div className="col-lg-7">
                 <div className="media d-block d-sm-flex align-items-sm-center">
                   <div className="u-lg-avatar position-relative mb-3 mb-sm-0 mr-3">
-                    <img className="img-fluid rounded-circle" src={`${config.BASE_URL}/storage/${user.avatar_location}`} alt={user.avatar_location} />
+                    <img
+                      className="img-fluid rounded-circle"
+                      src={`${config.BASE_URL}/storage/${user.userInfo.avatar_location}`}
+                      alt={user.userInfo.avatar_location}
+                    />
                   </div>
                   <div className="media-body">
-                    <h1 className="h3 text-white font-weight-medium mb-1">Howdy, {user.full_name}</h1>
-                    <span className="d-block text-white">{user.email}</span>
+                    <h1 className="h3 text-white font-weight-medium mb-1">Howdy, {user.userInfo.full_name}</h1>
+                    <span className="d-block text-white">{user.userInfo.email}</span>
                   </div>
                 </div>
               </div>
@@ -123,9 +128,10 @@ class Account extends Component {
         </div>
         <div className="bg-light">
           <Switch>
-            <Route path={`${match.path}/dashboard`} component={Dashboard} />
-            <Route path={`${match.path}/profile`} component={Profile} />
+            <Route path={`${match.path}/dashboard`} render={(props) => <Dashboard {...props}  authUser={user}/>} />
+            <Route path={`${match.path}/profile`} component={() => <Profile isAuthed={true} />} />
             <Route path={`${match.path}/api-token`} component={ApiToken} />
+            <Route path={`${match.path}/transactions`} component={Transaction} />
             <Redirect to={`${match.path}/dashboard`} />
           </Switch>
         </div>
@@ -135,7 +141,7 @@ class Account extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.userReducer.userInfo,
+  user: state.userReducer,
 });
 
 const mapDispatchToProps = {

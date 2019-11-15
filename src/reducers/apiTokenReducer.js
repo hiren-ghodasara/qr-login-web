@@ -2,7 +2,7 @@ import initialState from "./initialState";
 import * as types from "../actions/actionTypes";
 import produce from "immer";
 
-const ApiRecipe = (draft = initialState.contest, action) => {
+const ApiRecipe = (draft = initialState.apiToken, action) => {
   switch (action.type) {
     case types.LOAD_API_TOKENS_SUCCESS:
       return {

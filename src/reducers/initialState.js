@@ -1,7 +1,7 @@
 import { loadUserFromLocal } from "../localStorage";
 const persistedState = loadUserFromLocal();
 export default {
-  user: Object.assign(persistedState, { userList: [], userInfo: {}, authModel: false }),
+  user: Object.assign(persistedState, { userList: [], userInfo: { balance: 0 }, authModel: false }),
   contest: {
     data: [],
     total: 0,
@@ -21,5 +21,8 @@ export default {
   },
   apiToken: {
     tokens: [],
+  },
+  transaction: {
+    list: [],
   },
 };
