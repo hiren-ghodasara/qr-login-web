@@ -1,0 +1,2 @@
+(window["webpackJsonpqr-auth-web"]=window["webpackJsonpqr-auth-web"]||[]).push([[9],{1557:function(e,t,n){"use strict";n.r(t);var a=n(0),l=n.n(a);t.default=function(e){var t="Page not found";return e.text&&(t=e.text),l.a.createElement("div",{style:{textAlign:"center"}},l.a.createElement("h1",null,t),l.a.createElement("div",{style:{fontSize:72,fontWeight:"bold"}},"404"),l.a.createElement("img",{src:"".concat("/qr-login-web","/assets/Black_Hole_Orange.png"),alt:"Black_Hole_Orange"}))}}}]);
+//# sourceMappingURL=9.1f3aa51c.chunk.js.map
