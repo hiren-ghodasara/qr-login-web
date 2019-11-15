@@ -51,7 +51,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.userReducer,
 });
 
 const mapDispatchToProps = {

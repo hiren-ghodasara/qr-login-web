@@ -1,13 +1,11 @@
 import axios from "axios";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import * as types from "./actionTypes";
-import { beginAjaxCall, ajaxCallError } from "./ajaxStatusActions";
 import { getLocalState, setLocalState } from "../localStorage";
 import config from "../config";
 
 export function getAccessToken(code) {
   return async (dispatch) => {
-    dispatch(beginAjaxCall());
     const exchangeOptions = {
       grant_type: "authorization_code",
       client_id: config.auth.AUTH_CLIENT_ID,
@@ -28,7 +26,6 @@ export function getAccessToken(code) {
       saveTokens(res);
       dispatch({ type: types.AUTH_TOKEN_SUCCESS, payload: res });
     } catch (error) {
-      dispatch(ajaxCallError());
       return Promise.reject(error);
     }
   };
@@ -36,7 +33,6 @@ export function getAccessToken(code) {
 
 export function onRefreshToken(refreshToken) {
   return async (dispatch) => {
-    dispatch(beginAjaxCall());
     const exchangeOptions = {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
@@ -59,7 +55,6 @@ export function onRefreshToken(refreshToken) {
       dispatch({ type: types.AUTH_TOKEN_SUCCESS, payload: res });
       return res;
     } catch (error) {
-      dispatch(ajaxCallError());
       return Promise.reject(error);
     }
   };
@@ -71,39 +66,6 @@ export function getUserProfile() {
     try {
       const res = await axios.get("/api/user");
       dispatch({ type: types.USER_LOGIN_SUCCESS, payload: res });
-      dispatch(hideLoading());
-      return res;
-    } catch (error) {
-      dispatch(hideLoading());
-      return Promise.reject(error);
-    }
-  };
-}
-
-export function getAllApiTokens() {
-  return async (dispatch) => {
-    dispatch(showLoading());
-    try {
-      const res = await axios.get("/api/user-tokens");
-      dispatch({ type: types.USER_API_TOKENS_SUCCESS, payload: res });
-      dispatch(hideLoading());
-      return res;
-    } catch (error) {
-      dispatch(hideLoading());
-      return Promise.reject(error);
-    }
-  };
-}
-
-export function revokeToken(id) {
-  return async (dispatch) => {
-    dispatch(showLoading());
-    try {
-      const res = await axios.get("/api/revoke-tokens", {
-        params: {
-          id: id,
-        },
-      });
       dispatch(hideLoading());
       return res;
     } catch (error) {
@@ -127,7 +89,6 @@ export function getQrCode() {
 export function getUserList() {
   return async function(dispatch) {
     dispatch(showLoading());
-    dispatch(beginAjaxCall());
     try {
       const res = await axios.get("/api/user-list");
       dispatch({ type: types.USER_LIST_SUCCESS, payload: res });

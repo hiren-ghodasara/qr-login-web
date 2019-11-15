@@ -1,8 +1,7 @@
 import { loadUserFromLocal } from "../localStorage";
 const persistedState = loadUserFromLocal();
 export default {
-  user: Object.assign(persistedState, { userList: [],tokens:[], userInfo: {}, authModel: false }),
-  ajaxCallsInProgress: 0,
+  user: Object.assign(persistedState, { userList: [], userInfo: {}, authModel: false }),
   contest: {
     data: [],
     total: 0,
@@ -15,9 +14,12 @@ export default {
       sortArr: [
         { key: "execution_date", text: "Execution Date", isActive: true, sortBy: "asc" },
         { key: "joining_fee", text: "Cheapest", isActive: false, sortBy: "asc" },
-        { key: "joined_user", text: "Availability", isActive: false, sortBy: "asc" }
-      ]
+        { key: "joined_user", text: "Availability", isActive: false, sortBy: "asc" },
+      ],
     },
-    listLoader: false
-  }
+    listLoader: false,
+  },
+  apiToken: {
+    tokens: [],
+  },
 };

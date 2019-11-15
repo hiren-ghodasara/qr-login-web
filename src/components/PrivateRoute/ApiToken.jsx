@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Table, Button, Tag } from "antd";
-import { getAllApiTokens, revokeToken } from "../../actions/userAction";
+import { Table, Popconfirm, Button, message } from "antd";
+import { getAllApiTokens, revokeToken } from "../../actions/apiTokenAction";
 
 const ApiToken = (props) => {
-  const tokens = useSelector((state) => state.user.tokens);
+  const tokens = useSelector((state) => state.apiTokenReducer.tokens);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllApiTokens());
-  }, []);
+  }, [dispatch]);
   const deleteToken = (token) => {
     console.log("token", token);
-    dispatch(revokeToken(token.id));
+    dispatch(revokeToken(token.id)).then((res) => {
+      message.success("Click on Yes");
+    });
   };
   const columns = [
     {
@@ -30,12 +32,12 @@ const ApiToken = (props) => {
       key: "expires_at",
     },
     {
-      title: "Action",
+      title: "Revoke",
       key: "action",
       render: (text, record) => (
-        <Button onClick={() => deleteToken(record)} type="link">
-          Delete
-        </Button>
+        <Popconfirm title="Are you sure delete this task?" onConfirm={() => deleteToken(record)} okText="Yes" cancelText="No">
+          <Button type="link">Revoke</Button>
+        </Popconfirm>
       ),
     },
   ];

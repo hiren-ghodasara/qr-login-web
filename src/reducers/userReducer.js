@@ -27,11 +27,6 @@ export const userReducer = (state = initialState.user, action) => {
         ...state,
         userList: action.payload
       };
-    case types.USER_API_TOKENS_SUCCESS:
-      return {
-        ...state,
-        tokens: action.payload
-      };
     case types.CHANGE_AUTH_MODEL_VISIBILITY:
       return {
         ...state,

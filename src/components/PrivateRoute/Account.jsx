@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Menu, Dropdown, Icon } from "antd";
 import { connect } from "react-redux";
 import { Link, Route, Switch, Redirect } from "react-router-dom";
-import { getUserList } from "../../actions/userAction";
+import { getUserProfile } from "../../actions/userAction";
 import config from "../../config";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
@@ -37,22 +37,12 @@ const billingMenu = (
   <Menu>
     <Menu.Item>
       <Link className="dropdown-item" to={`/account/dashboard`}>
-        Dashboard
+        Activity
       </Link>
     </Menu.Item>
     <Menu.Item>
       <Link className="dropdown-item" to={`/account/profile`}>
-        Profile
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link className="dropdown-item" to={`/account/profile`}>
-        My tasks
-      </Link>
-    </Menu.Item>
-    <Menu.Item>
-      <Link className="dropdown-item" to={`/account/profile`}>
-        Projects
+        Payment methods
       </Link>
     </Menu.Item>
   </Menu>
@@ -75,7 +65,7 @@ const accessibilityMenu = (
 
 class Account extends Component {
   componentDidMount() {
-    this.props.getUserList();
+    this.props.getUserProfile();
   }
   render() {
     const { user, match } = this.props;
@@ -145,14 +135,11 @@ class Account extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.userInfo,
-  userList: state.user.userList || [],
+  user: state.userReducer.userInfo,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getUserList: (event) => dispatch(getUserList()),
-  };
+const mapDispatchToProps = {
+  getUserProfile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
