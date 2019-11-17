@@ -8,6 +8,7 @@ import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import ApiToken from "./ApiToken";
 import Transaction from "./Transaction";
+import PaymentMethod from "./PaymentMethod";
 
 const generalMenu = (
   <Menu>
@@ -42,7 +43,7 @@ const billingMenu = (
       </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link className="dropdown-item" to={`/account/profile`}>
+      <Link className="dropdown-item" to={`/account/payment-method`}>
         Payment methods
       </Link>
     </Menu.Item>
@@ -132,6 +133,7 @@ class Account extends Component {
             <Route path={`${match.path}/profile`} component={() => <Profile isAuthed={true} />} />
             <Route path={`${match.path}/api-token`} component={ApiToken} />
             <Route path={`${match.path}/transactions`} component={Transaction} />
+            <Route path={`${match.path}/payment-method`} component={PaymentMethod} />
             <Redirect to={`${match.path}/dashboard`} />
           </Switch>
         </div>

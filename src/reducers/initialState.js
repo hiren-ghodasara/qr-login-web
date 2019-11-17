@@ -25,4 +25,7 @@ export default {
   transaction: {
     list: [],
   },
+  paymentMethod: {
+    list: [],
+  },
 };

@@ -14,12 +14,10 @@ const Dashboard = (props) => {
           <div className="card-body p-5">
             <div className="media align-items-center">
               <span className="btn btn-lg btn-icon btn-soft-primary rounded-circle mr-4">
-                <span className="fas fa-dollar-sign btn-ico[;[;[;[;[;[;[;[;[;[;[;[;[;[;[;[;[;[;[;n__inner" />
+                <span className="fas fa-dollar-sign btn-icon__inner" />
               </span>
               <div className="media-body">
-                <span className="d-block font-size-3">
-                  $ {userInfo.balance}
-                </span>
+                <span className="d-block font-size-3">$ {userInfo.balance}</span>
                 <h2 className="h6 text-secondary font-weight-normal mb-0">Available balance</h2>
               </div>
             </div>

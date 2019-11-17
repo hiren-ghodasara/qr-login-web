@@ -13,8 +13,8 @@ const dev = {
     IDENTITY_POOL_ID: "YOUR_DEV_IDENTITY_POOL_ID"
   },
   auth: {
-    AUTH_CLIENT_ID: 3,
-    AUTH_CLIENT_SECRET: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
+    AUTH_CLIENT_ID: 2,
+    AUTH_CLIENT_SECRET: "JOAqCa9R5QybMJB13YsjjwyfmCCBpO6u0OAZ0haA",
     REDIRECT_URI: "http://localhost:3000/auth-callback.html"
   },
   BASE_URL: "http://127.0.0.1:8000"
@@ -35,8 +35,8 @@ const prod = {
     IDENTITY_POOL_ID: "YOUR_PROD_IDENTITY_POOL_ID"
   },
   auth: {
-    AUTH_CLIENT_ID: 3,
-    AUTH_CLIENT_SECRET: "2UItr62OLvEBfvuCLP396VpK9S1jVSgmXoksh2x0",
+    AUTH_CLIENT_ID: 2,
+    AUTH_CLIENT_SECRET: "JOAqCa9R5QybMJB13YsjjwyfmCCBpO6u0OAZ0haA",
     REDIRECT_URI: "https://hiren-ghodasara.github.io/qr-login-web/auth-callback.html"
   },
   BASE_URL: "http://qr-login-backend.initcode.in"
