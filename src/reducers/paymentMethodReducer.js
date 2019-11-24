@@ -7,7 +7,7 @@ const PaymentMethodRecipe = (draft = initialState.transaction, action) => {
     case types.LOAD_PAYMENT_METHOD_SUCCESS:
       return {
         ...draft,
-        list: action.payload.data,
+        list: action.payload,
       };
     default:
       return draft;
