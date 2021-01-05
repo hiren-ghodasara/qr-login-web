@@ -5,7 +5,7 @@
   "homepage": "https://hiren-ghodasara.github.io/qr-login-web",
   "dependencies": {
     "antd": "^3.23.3",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "cuid": "^2.1.6",
     "faker": "^4.1.0",
