@@ -11,7 +11,7 @@
     "faker": "^4.1.0",
     "font-awesome": "^4.7.0",
     "http-build-query": "^0.7.0",
-    "immer": "^4.0.2",
+    "immer": "^9.0.6",
     "jquery": "^3.4.1",
     "laravel-echo": "^1.6.1",
     "lodash": "^4.17.15",
